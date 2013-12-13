@@ -9,13 +9,20 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Assets/map1.jpg"/>
+            <ImageBrush ImageSource="/Resources/map1.jpg"/>
         </Grid.Background>
-        <Button Content="Start" HorizontalAlignment="Left" Height="114" Margin="546,599,0,0" VerticalAlignment="Top" Width="344" FontWeight="Bold" FontSize="120" FontFamily="Birch Std"/>
-        <Grid x:Name="miniMapGrid" HorizontalAlignment="Left" Height="380" Margin="292,196,0,0" VerticalAlignment="Top" Width="780">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Start" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Height="141" VerticalAlignment="Top" Width="344" FontWeight="Bold" FontSize="120" FontFamily="Birch Std"/>
+        <Grid Grid.Column="0" Grid.Row="0" x:Name="miniMapGrid" HorizontalAlignment="Center" Height="380"  VerticalAlignment="Top" Width="780">
             <Border BorderBrush="Black" BorderThickness="5"/>
             <Grid.Background>
-                <ImageBrush ImageSource="/Assets/miniMap.png"/>
+                <ImageBrush ImageSource="/Resources/miniMap.png"/>
             </Grid.Background>
         </Grid>
 

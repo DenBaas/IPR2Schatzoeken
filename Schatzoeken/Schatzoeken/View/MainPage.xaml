@@ -10,17 +10,36 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Assets/map2.png"/>
+            <ImageBrush ImageSource="Resources/map2.png"/>
         </Grid.Background>
-        <Grid HorizontalAlignment="Left" Height="525" Margin="184,82,0,0" VerticalAlignment="Top" Width="644">
-            <Maps:Map Name="map" HorizontalAlignment="Left" VerticalAlignment="Top" Height="525" Width="644" Credentials="ApP8w_Nr1AfAzMIkuL3J18eqx273XDkWKJdca3Li9PwqjGMesTcWReVp2KslSsRv"/>
+        <Grid.ColumnDefinitions>
+            
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="30*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Height="525" VerticalAlignment="Top" Width="644">
+                <Maps:Map Name="map" HorizontalAlignment="Left" VerticalAlignment="Top" Height="525" Width="644" Credentials="ApP8w_Nr1AfAzMIkuL3J18eqx273XDkWKJdca3Li9PwqjGMesTcWReVp2KslSsRv"/>
+            </Grid>
+            <Grid Grid.Column="1" HorizontalAlignment="Left" Height="525"  VerticalAlignment="Top" Width="318">
+                <ListBox HorizontalAlignment="Left" Height="505" Margin="10,10,0,0" VerticalAlignment="Top" Width="298" Background="#19FFFFFF"/>
+            </Grid>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="525" Margin="940,82,0,0" VerticalAlignment="Top" Width="318">
-            <ListBox HorizontalAlignment="Left" Height="505" Margin="10,10,0,0" VerticalAlignment="Top" Width="298" Background="#19FFFFFF"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="menuButton" Content="Menu" HorizontalAlignment="Left" Height="54"  VerticalAlignment="Top" Width="158" RenderTransformOrigin="-0.135,0.5" Click="menuButton_Click"/>
+            <Button Grid.Column="1" x:Name="settingButton" Content="Instellingen" HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="158" RenderTransformOrigin="-0.135,0.5" Click="settingButton_Click"/>
+            <Button Grid.Column="2" x:Name="helpButton" Content="Help" HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="158" RenderTransformOrigin="-0.135,0.5" Click="helpButton_Click"/>
         </Grid>
-        <Button x:Name="menuButton" Content="Menu" HorizontalAlignment="Left" Height="54" Margin="235,672,0,0" VerticalAlignment="Top" Width="158" RenderTransformOrigin="-0.135,0.5" Click="menuButton_Click"/>
-        <Button x:Name="settingButton" Content="Instellingen" HorizontalAlignment="Left" Height="54" Margin="429,672,0,0" VerticalAlignment="Top" Width="158" RenderTransformOrigin="-0.135,0.5" Click="settingButton_Click"/>
-        <Button x:Name="helpButton" Content="Help" HorizontalAlignment="Left" Height="54" Margin="627,672,0,0" VerticalAlignment="Top" Width="158" RenderTransformOrigin="-0.135,0.5" Click="helpButton_Click"/>
-
     </Grid>
 </Page>

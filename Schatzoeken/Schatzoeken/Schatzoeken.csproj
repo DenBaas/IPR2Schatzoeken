@@ -140,13 +140,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />
-    <Content Include="Assets\map1.jpg" />
-    <Content Include="Assets\map2.png" />
-    <Content Include="Assets\miniMap.png" />
+    <Content Include="Resources\map1.jpg" />
+    <Content Include="Resources\map2.png" />
+    <Content Include="Resources\miniMap.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
-    <Content Include="Assets\treasure map.jpg" />
+    <Content Include="Resources\treasure map.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
