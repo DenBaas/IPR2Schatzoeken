@@ -24,15 +24,24 @@ namespace Schatzoeken
     public sealed partial class MainPage : Page
     {
         private Controller control;
-        public MainPage()
+        private string name;
+
+        public MainPage(string name)
         {
+            this.name = name;
             this.InitializeComponent();
             control = new Controller(this);
+            Model.Route route = control.GetRoute();
+        }
+
+        public string GetName()
+        {
+            return name;
         }
 
         private void menuButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void settingButton_Click(object sender, RoutedEventArgs e)

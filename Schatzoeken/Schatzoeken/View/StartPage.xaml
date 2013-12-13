@@ -9,22 +9,29 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/map1.jpg"/>
+            <ImageBrush ImageSource="/Resources/Map2.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="80*"/>
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100*"/>
-        </Grid.ColumnDefinitions>
-        <Button Content="Start" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Height="141" VerticalAlignment="Top" Width="344" FontWeight="Bold" FontSize="120" FontFamily="Birch Std"/>
-        <Grid Grid.Column="0" Grid.Row="0" x:Name="miniMapGrid" HorizontalAlignment="Center" Height="380"  VerticalAlignment="Top" Width="780">
+        
+        
+        <Grid Grid.Column="1" Grid.Row="0" x:Name="miniMapGrid" HorizontalAlignment="Center" Height="380"  VerticalAlignment="Top" Width="780">
             <Border BorderBrush="Black" BorderThickness="5"/>
             <Grid.Background>
                 <ImageBrush ImageSource="/Resources/miniMap.png"/>
             </Grid.Background>
         </Grid>
-
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="45*"/>
+                <ColumnDefinition Width="40*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="Naam:" VerticalAlignment="Top" Height="77" Width="208" FontSize="72" SelectionHighlightColor="#FF1E113E"/>
+            <TextBox x:Name="NameBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="77" Width="663" FontSize="36" TextChanged="TextBox_TextChanged"/>
+            <Button x:Name="Start" Content="Start" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Height="141" VerticalAlignment="Top" Width="344" FontWeight="Bold" FontSize="120" FontFamily="Birch Std" Click="Button_Click" Visibility="Collapsed" />
+        </Grid>
     </Grid>
 </Page>

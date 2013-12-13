@@ -13,22 +13,27 @@ namespace Schatzoeken.Control
 
         public Controller(MainPage mainpage)
         {
-            read();
+            Read();
                
         }
 
-        public void read()
+        public Route GetRoute()
+        {
+            return route;
+        }
+
+        public void Read()
         {
             //inladen
 
             if(route == null)
             {
                 route = Route.GETSTANDARDROUTE(); 
-                save();
+                Save();
             }
         }
 
-        public void save()
+        public void Save()
         {
 
         }

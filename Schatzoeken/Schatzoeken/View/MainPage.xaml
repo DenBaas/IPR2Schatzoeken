@@ -7,7 +7,6 @@
     xmlns:Maps="using:Bing.Maps"
     x:Class="Schatzoeken.MainPage"
     mc:Ignorable="d">
-
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="Resources/map2.png"/>

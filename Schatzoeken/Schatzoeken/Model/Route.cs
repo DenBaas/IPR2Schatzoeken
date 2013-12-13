@@ -32,32 +32,32 @@ namespace Schatzoeken.Model
             return route;
         }
 
-        public void addHint(Hint newhint)
+        public void AddHint(Hint newhint)
         {
             hints.Add(newhint);
         }
 
-        public void addMonster(Monster newMonster)
+        public void AddMonster(Monster newMonster)
         {
             monsters.Add(newMonster);
         }
 
-        public void addTreasure(Treasure newTr)
+        public void AddTreasure(Treasure newTr)
         {
             treasures.Add(newTr);
         }
 
-        public List<Hint> getHints()
+        public List<Hint> GetHints()
         {
             return hints;
         }
 
-        public List<Monster> getMonsters()
+        public List<Monster> GetMonsters()
         {
             return monsters;
         }
 
-        public List<Treasure> getTreasures()
+        public List<Treasure> GetTreasures()
         {
             return treasures;
         }
