@@ -27,17 +27,22 @@ namespace Schatzoeken.View
             this.InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(NameBox.Text != "" && NameBox.Text.Length > 2 && NameBox.Text.Length <30 )
+                Start.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            else
+                Start.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+        }
+
+        private void Button_Click(object sender, TappedRoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage), NameBox.Text);
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void goToHighscore(object sender, TappedRoutedEventArgs e)
         {
-            if(NameBox.Text != "" && NameBox.Text.Length > 3 && NameBox.Text.Length <30 )
-                Start.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            else
-                Start.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            this.Frame.Navigate(typeof(Highscore));
         }
     }
 }

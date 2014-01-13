@@ -12,10 +12,17 @@ namespace Schatzoeken.Model
         private int hitByMonsters = 0;
         private int treasuresFound = 0;
         private int hintsFound = 0;
+        public readonly string Name;
 
         public Person(string newName)
         {
-            
+            Name = newName;
+        }
+
+        public Person(string newName, int score)
+        {
+            Name = newName;
+            this.score = score;
         }
 
         public int getScore()
@@ -32,6 +39,8 @@ namespace Schatzoeken.Model
             else
                 treasuresFound++;
             score += points;
+            if (score < 0)
+                points = 0;
         }
 
         public int getHitsOfMonsters()
@@ -47,6 +56,11 @@ namespace Schatzoeken.Model
         public int HintsFound()
         {
             return hintsFound;
+        }
+
+        public override string ToString()
+        {
+            return Name + "\t score: " + score.ToString();
         }
     }
 }

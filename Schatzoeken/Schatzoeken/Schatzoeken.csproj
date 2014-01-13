@@ -112,6 +112,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\Controller.cs" />
+    <Compile Include="Control\DataReader.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="Model\Hint.cs" />
     <Compile Include="Model\Monster.cs" />
     <Compile Include="Model\Person.cs" />
@@ -120,6 +122,9 @@
     <Compile Include="Model\Treasure.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Highscore.xaml.cs">
+      <DependentUpon>Highscore.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Popup.xaml.cs">
       <DependentUpon>Popup.xaml</DependentUpon>
@@ -153,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\Highscore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Popup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

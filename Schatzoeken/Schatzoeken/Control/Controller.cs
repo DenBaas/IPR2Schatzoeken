@@ -10,6 +10,8 @@ namespace Schatzoeken.Control
     public class Controller
     {
         private Route route = null;
+        public Person person;
+        public int score;
 
         public Controller(MainPage mainpage)
         {

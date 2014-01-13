@@ -12,7 +12,8 @@
             <ImageBrush ImageSource="/Resources/Map2.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         
@@ -23,7 +24,8 @@
                 <ImageBrush ImageSource="/Resources/miniMap.png"/>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Row="1">
+        <Button Grid.Row="1" Content="Highscore" Tapped="goToHighscore" HorizontalAlignment="Left" VerticalAlignment="Stretch" FontSize="48" />
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="45*"/>
@@ -31,7 +33,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="Naam:" VerticalAlignment="Top" Height="77" Width="208" FontSize="72" SelectionHighlightColor="#FF1E113E"/>
             <TextBox x:Name="NameBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="77" Width="663" FontSize="36" TextChanged="TextBox_TextChanged"/>
-            <Button x:Name="Start" Content="Start" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Height="141" VerticalAlignment="Top" Width="344" FontWeight="Bold" FontSize="120" FontFamily="Birch Std" Click="Button_Click" Visibility="Collapsed" />
+            <Button x:Name="Start" Content="Start" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Height="141" VerticalAlignment="Top" Width="344" FontWeight="Bold" FontSize="120" FontFamily="Birch Std" Tapped="Button_Click" Visibility="Collapsed" />
         </Grid>
     </Grid>
 </Page>

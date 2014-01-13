@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="Schatzoeken.View.Highscore"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Schatzoeken.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="95*"/>
+        </Grid.RowDefinitions>
+        <TextBox Text="Highscore" Grid.Row="0" HorizontalAlignment="Center"/>
+        <ListBox x:Name="playersInHighscore" HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1"/>
+    </Grid>
+</Page>
