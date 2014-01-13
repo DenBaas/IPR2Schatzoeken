@@ -45,7 +45,7 @@ namespace Schatzoeken.Control
             }
             catch (Exception e)
             {
-                Debug.Print(e.Source + "-------------------------------------------------------------");
+                Debug.Print(e.StackTrace);
             }
         }
 

@@ -13,6 +13,6 @@
             <RowDefinition Height="95*"/>
         </Grid.RowDefinitions>
         <TextBox Text="Highscore" Grid.Row="0" HorizontalAlignment="Center"/>
-        <ListBox x:Name="playersInHighscore" HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1"/>
+        <ListBox x:Name="playersInHighscore" HorizontalAlignment="Left" ItemsSource="{Binding}" VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1"/>
     </Grid>
 </Page>

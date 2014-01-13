@@ -34,8 +34,7 @@ namespace Schatzoeken.View
             if (persons.Count == 0)
                 playersInHighscore.Items.Add("De highscore is leeg");
             else
-            foreach(Model.Person p in persons)
-                playersInHighscore.Items.Add(p);
+                playersInHighscore.ItemsSource = persons;
         }
     }
 }
