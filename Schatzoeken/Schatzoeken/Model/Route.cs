@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
+using Bing.Maps;
 
 namespace Schatzoeken.Model
 {
     public class Route
     {
         private List<Waypoint> waypoints = new List<Waypoint>();
-        private List<RouteObject> routeObjects = new List<RouteObject>();
+        private Dictionary<Location, RouteObject> locationsWithRouteObjects = new Dictionary<Bing.Maps.Location, RouteObject>();
 
         public Route()
         {
@@ -34,7 +35,7 @@ namespace Schatzoeken.Model
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.592194, 4.778372)));
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591277, 4.779482)));
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591201, 4.780453)));
-            waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591724, 4.780459)));
+            waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591724, 4.780459)));//treasure
         }
 
         public static Route GETSTANDARDROUTE()
@@ -50,24 +51,9 @@ namespace Schatzoeken.Model
             return route;
         }
 
-        public void AddHint(Hint newhint)
+        public Dictionary<Location, RouteObject> LocationsWithRouteObjects()
         {
-            routeObjects.Add(newhint);
-        }
-
-        public void AddMonster(Monster newMonster)
-        {
-            routeObjects.Add(newMonster);
-        }
-
-        public void AddTreasure(Treasure newTr)
-        {
-            routeObjects.Add(newTr);
-        }
-
-        public List<RouteObject> GetRouteObjects()
-        {
-            return routeObjects;
+            return locationsWithRouteObjects;
         }
     }
 }
