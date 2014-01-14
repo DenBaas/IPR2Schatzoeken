@@ -63,7 +63,7 @@ namespace Schatzoeken.Control
             return persons;
         }
 
-        public async void save()
+        private async void save()
         {
             var _Option = Windows.Storage.CreationCollisionOption.ReplaceExisting;
             var _File = await dataPath.CreateFileAsync(pad, _Option);
@@ -71,6 +71,13 @@ namespace Schatzoeken.Control
             foreach (Model.Person person in persons)
                 fileText += person.Name + "\r\n" + person.getScore().ToString() + "\r\n";
             await Windows.Storage.FileIO.WriteTextAsync(_File, fileText);
+        }
+
+        public async void Save(Model.Person person)
+        {
+            persons.Add(person);
+            persons = persons.OrderBy(p => p.getScore()).ToList();
+            save();
         }
     }    
 }

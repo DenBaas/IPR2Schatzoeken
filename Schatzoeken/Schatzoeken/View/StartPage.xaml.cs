@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Schatzoeken.Control;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,7 +23,6 @@ namespace Schatzoeken.View
     /// </summary>
     public sealed partial class BlankPage1 : Page
     {
-        Control.Controller control = new Control.Controller();
 
         public BlankPage1()
         {
@@ -56,7 +56,9 @@ namespace Schatzoeken.View
 
         private void goToHighscore(object sender, TappedRoutedEventArgs e)
         {
+            Control.Controller.GetController().Save();
             this.Frame.Navigate(typeof(Highscore), NameBox.Text);
+            
         }
     }
 }

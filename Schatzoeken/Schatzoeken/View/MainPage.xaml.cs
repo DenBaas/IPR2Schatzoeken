@@ -23,17 +23,21 @@ namespace Schatzoeken
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private Controller control;
 
         public MainPage()
         {
             this.InitializeComponent();
-            Model.Route route = control.GetRoute();
+            Model.Route route = Controller.GetController().GetRoute();
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            control.person = new Model.Person(e.Parameter as string);
+            Controller.GetController().person = new Model.Person(e.Parameter as string);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Control.DataReader.GetDataReader().Save()
         }
     }
 }

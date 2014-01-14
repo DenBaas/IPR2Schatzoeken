@@ -12,11 +12,24 @@ namespace Schatzoeken.Control
         private Route route = null;
         public Person person;
         public int score;
+        private static Controller controller = null;
 
-        public Controller()
+        private Controller()
         {
             Read();
                
+        }
+
+        public static Controller GetController()
+        {
+            if (controller == null)
+                controller = new Controller();
+            return controller;
+        }
+
+        public void EndGame()
+        {
+
         }
 
         public Route GetRoute()
@@ -37,7 +50,12 @@ namespace Schatzoeken.Control
 
         public void Save()
         {
-
+            if (person == null)
+            {
+                person = new Person("asdfsdafsdf");
+                person.addScore(400);
+            }
+            DataReader.GetDataReader().Save(person);
         }
     }
 }
