@@ -23,12 +23,16 @@
                 <Maps:Map Name="map" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Credentials="ApP8w_Nr1AfAzMIkuL3J18eqx273XDkWKJdca3Li9PwqjGMesTcWReVp2KslSsRv"/>
             </Grid>
             <Grid Margin="10,0,0,0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                <Grid.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="/Resources/hintPaper.jpg" />
+                </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="95*"/>
                 </Grid.RowDefinitions>
                 <TextBox Text="Hints" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False"/>
-                <ListBox HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="False"/>
+                <ListBox HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="Transparent" Grid.Row="1" IsEnabled="False">
+                </ListBox>
             </Grid>
         </Grid>
     </Grid>

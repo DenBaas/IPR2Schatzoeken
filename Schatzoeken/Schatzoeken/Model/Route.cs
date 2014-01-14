@@ -18,7 +18,7 @@ namespace Schatzoeken.Model
 
         public Route()
         {
-
+            fillTreasureRoute();
         }
 
         private void fillTreasureRoute()
