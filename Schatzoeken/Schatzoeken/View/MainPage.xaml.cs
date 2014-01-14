@@ -28,13 +28,12 @@ namespace Schatzoeken
         public MainPage()
         {
             this.InitializeComponent();
-            control = new Controller(this);
             Model.Route route = control.GetRoute();
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            control.person = new Model.Person((string)e.Parameter);
+            control.person = new Model.Person(e.Parameter as string);
         }
     }
 }

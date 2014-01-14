@@ -22,6 +22,9 @@ namespace Schatzoeken.View
     /// </summary>
     public sealed partial class Highscore : Page
     {
+
+        private string name = string.Empty;
+
         public Highscore()
         {
             this.InitializeComponent();
@@ -29,12 +32,17 @@ namespace Schatzoeken.View
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Control.DataReader datareader = new Control.DataReader();
-            List<Model.Person> persons = datareader.GetPersonsFromHighscore();
+            name = e.Parameter as string;
+            List<Model.Person> persons = Control.DataReader.GetDataReader().GetPersonsFromHighscore();
             if (persons.Count == 0)
-                playersInHighscore.Items.Add("De highscore is leeg");
+                playersInHighscore.ItemsSource = "De highscore is leeg";
             else
                 playersInHighscore.ItemsSource = persons;
+        }
+
+        private void goBack(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(BlankPage1), name);
         }
     }
 }

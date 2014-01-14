@@ -27,8 +27,8 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="95*"/>
                 </Grid.RowDefinitions>
-                <TextBox Text="Hints" Grid.Row="0" HorizontalAlignment="Center"/>
-                <ListBox HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1"/>
+                <TextBox Text="Hints" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False"/>
+                <ListBox HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="False"/>
             </Grid>
         </Grid>
     </Grid>

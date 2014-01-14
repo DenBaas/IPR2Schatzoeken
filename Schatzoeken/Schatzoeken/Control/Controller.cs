@@ -13,7 +13,7 @@ namespace Schatzoeken.Control
         public Person person;
         public int score;
 
-        public Controller(MainPage mainpage)
+        public Controller()
         {
             Read();
                
@@ -39,6 +39,5 @@ namespace Schatzoeken.Control
         {
 
         }
-
     }
 }

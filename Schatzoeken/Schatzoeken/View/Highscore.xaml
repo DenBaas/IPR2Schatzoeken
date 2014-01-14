@@ -9,10 +9,17 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="95*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
         </Grid.RowDefinitions>
-        <TextBox Text="Highscore" Grid.Row="0" HorizontalAlignment="Center"/>
-        <ListBox x:Name="playersInHighscore" HorizontalAlignment="Left" ItemsSource="{Binding}" VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="90*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Terug" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tapped="goBack"/>
+            <TextBox Text="Highscore" Grid.Column="1" HorizontalAlignment="Center" IsEnabled="False" />
+        </Grid>        
+        <ListBox x:Name="playersInHighscore" HorizontalAlignment="Left" ItemsSource="{Binding}" VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="False"/>
     </Grid>
 </Page>

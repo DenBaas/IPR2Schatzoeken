@@ -22,14 +22,28 @@ namespace Schatzoeken.View
     /// </summary>
     public sealed partial class BlankPage1 : Page
     {
+        Control.Controller control = new Control.Controller();
+
         public BlankPage1()
         {
             this.InitializeComponent();
         }
 
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if((e.Parameter.GetType() == typeof(string)) || (e.Parameter.GetType() == typeof(String)))
+                NameBox.Text = e.Parameter as string;
+            checkIfNameIsCorrect();
+        }
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(NameBox.Text != "" && NameBox.Text.Length > 2 && NameBox.Text.Length <30 )
+            checkIfNameIsCorrect();
+        }
+
+        private void checkIfNameIsCorrect()
+        {
+            if(NameBox.Text != "" && NameBox.Text.Length > 2)
                 Start.Visibility = Windows.UI.Xaml.Visibility.Visible;
             else
                 Start.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
@@ -42,7 +56,7 @@ namespace Schatzoeken.View
 
         private void goToHighscore(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Highscore));
+            this.Frame.Navigate(typeof(Highscore), NameBox.Text);
         }
     }
 }
