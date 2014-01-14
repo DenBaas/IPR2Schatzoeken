@@ -9,7 +9,7 @@ namespace Schatzoeken.Control
 {
     public class Controller
     {
-        public const Route ROUTE = new Route();
+        public Route route;
         public Person Person = new Person();
         public int score = 0;
         //singleton
@@ -17,7 +17,7 @@ namespace Schatzoeken.Control
 
         private Controller()
         {
-
+            route = new Route();
         }
 
         public static Controller GetController()

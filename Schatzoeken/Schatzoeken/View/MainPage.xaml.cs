@@ -17,6 +17,7 @@ using Schatzoeken.View;
 using Windows.Devices.Geolocation;
 using Bing.Maps.Directions;
 using Bing.Maps;
+using Windows.Devices.Geolocation.Geofencing;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -35,7 +36,6 @@ namespace Schatzoeken
         public MainPage()
         {
             this.InitializeComponent();
-            Model.Route route = Controller.GetController().GetRoute();
 
             map.Children.Add(layer);
             map.Children.Add(icon);
@@ -43,6 +43,33 @@ namespace Schatzoeken
             geoLocation.PositionChanged +=
                 new TypedEventHandler<Geolocator,
                     PositionChangedEventArgs>(geoLocation_PositionChanged);
+            GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+        }
+
+        private async void OnGeofenceStateChanged(GeofenceMonitor sender, object args)
+        {
+            var reports = sender.ReadReports();
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                foreach(GeofenceStateChangeReport report in reports)
+                {
+                    GeofenceState state = report.NewState;
+                    Geofence geo = report.Geofence;
+
+                    if(state == GeofenceState.Removed)
+                    {
+                    }
+
+                    else if(state == GeofenceState.Entered)
+                    {
+
+                    }
+                    else if(state == GeofenceState.Exited)
+                    {
+
+                    }
+                }
+            });
         }
 
         private async void geoLocation_PositionChanged(Geolocator sender, PositionChangedEventArgs e)

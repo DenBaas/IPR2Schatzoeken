@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         
         
-        <Grid Grid.Column="1" Grid.Row="0" x:Name="miniMapGrid" HorizontalAlignment="Center" Height="380"  VerticalAlignment="Top" Width="780">
+        <Grid Grid.Column="1" Grid.Row="0" Margin="20" x:Name="miniMapGrid" HorizontalAlignment="Center" Height="380"  VerticalAlignment="Top" Width="780">
             <Border BorderBrush="Black" BorderThickness="5"/>
             <Grid.Background>
                 <ImageBrush ImageSource="/Resources/miniMap.png"/>
