@@ -12,11 +12,11 @@ namespace Schatzoeken.Model
         private int hitByMonsters = 0;
         private int treasuresFound = 0;
         private int hintsFound = 0;
-        public readonly string Name;
+        public string Name = String.Empty;
 
-        public Person(string newName)
+        public Person()
         {
-            Name = newName;
+
         }
 
         public Person(string newName, int score)
@@ -25,12 +25,12 @@ namespace Schatzoeken.Model
             this.score = score;
         }
 
-        public int getScore()
+        public int GetScore()
         {
             return score;
         }
 
-        public void addScore(int points)
+        public void AddScore(int points)
         {
             if (points == Hint.POINTS)
                 hintsFound++;
@@ -43,7 +43,7 @@ namespace Schatzoeken.Model
                 points = 0;
         }
 
-        public int getHitsOfMonsters()
+        public int GetHitsOfMonsters()
         {
             return hitByMonsters;
         }

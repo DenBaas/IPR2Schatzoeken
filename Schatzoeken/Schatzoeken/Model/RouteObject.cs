@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation.Geofencing;
+using Bing.Maps.Directions;
 
 namespace Schatzoeken.Model
 {
@@ -12,9 +13,11 @@ namespace Schatzoeken.Model
         private string information;
         private Geofence geofence;
         private bool visited = false;
+        public readonly Waypoint Location;
 
-        public RouteObject(string newInformation, Geofence newGeo)
+        public RouteObject(string newInformation, Geofence newGeo, Waypoint waypoint)
         {
+            Location = waypoint;
             this.information = newInformation;
             this.geofence = newGeo;
         }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation.Geofencing;
+using Bing.Maps.Directions;
+using Schatzoeken.Control;
 
 namespace Schatzoeken.Model
 {
@@ -11,7 +13,7 @@ namespace Schatzoeken.Model
     {
         public readonly int HitPoints;
 
-        public Monster(string newMonster, Geofence newGeo, int newHitPoints) : base(newMonster,newGeo)
+        public Monster(string newMonster, Geofence newGeo, int newHitPoints, Waypoint waypoint) : base(newMonster,newGeo, waypoint)
         {
             this.HitPoints = newHitPoints;
         }
@@ -20,7 +22,7 @@ namespace Schatzoeken.Model
 
         public override void Action()
         {
-            throw new NotImplementedException();
+            Controller.GetController().Person.AddScore(HitPoints);
         }
     }
 }

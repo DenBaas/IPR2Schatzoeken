@@ -27,17 +27,18 @@ namespace Schatzoeken.View
         public BlankPage1()
         {
             this.InitializeComponent();
+            NameBox.Text = "";
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if((e.Parameter.GetType() == typeof(string)) || (e.Parameter.GetType() == typeof(String)))
-                NameBox.Text = e.Parameter as string;
+            NameBox.Text = Controller.GetController().Person.Name;
             checkIfNameIsCorrect();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            Control.Controller.GetController().Person.Name = NameBox.Text;
             checkIfNameIsCorrect();
         }
 
@@ -51,14 +52,12 @@ namespace Schatzoeken.View
 
         private void Button_Click(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainPage), NameBox.Text);
+            this.Frame.Navigate(typeof(MainPage));
         }
 
         private void goToHighscore(object sender, TappedRoutedEventArgs e)
         {
-            Control.Controller.GetController().Save();
-            this.Frame.Navigate(typeof(Highscore), NameBox.Text);
-            
+            this.Frame.Navigate(typeof(Highscore));
         }
     }
 }

@@ -5,23 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Windows.Storage;
+using Schatzoeken.Model;
 
 namespace Schatzoeken.Control
 {
     public class DataReader
     {
-        private  string pad = @"players.txt";
+        private string padPlayers = @"players.txt";
         private readonly StorageFolder dataPath;
-        private StorageFile routePath;
-        private StorageFile players;
-        List<Model.Person> persons = new List<Model.Person>();
+        List<Person> persons = new List<Person>();
+        //singleton
         private static DataReader datareader = null;
 
         private DataReader()
         {
             dataPath = ApplicationData.Current.LocalFolder;
             initDataConnector();
-            //save();
         }
 
         public static DataReader GetDataReader()
@@ -33,18 +32,17 @@ namespace Schatzoeken.Control
 
         private async Task initDataConnector()
         {
-            //players = await dataPath.GetFileAsync(pad);
-            //players.OpenReadAsync();
-            //Debug.Print("o");
-            await load();
+            await loadPersons();
         }
 
-        private async Task load()
+        private async Task loadPersons()
         {
             try
             {
-                var file = await dataPath.GetFileAsync(pad);
+                var file = await dataPath.GetFileAsync(padPlayers);
                 var lines = await FileIO.ReadLinesAsync(file);
+                if (lines.Count < 2)
+                    return;
                 for (int i = 0; i < lines.Count - 1; i += 2)
                 {
                     string name = lines[i] as string;
@@ -52,7 +50,7 @@ namespace Schatzoeken.Control
                     persons.Add(new Model.Person(name, score));
                 }
             }
-            catch (Exception e)
+            catch (FormatException e)
             {
                 Debug.Print(e.StackTrace);
             }
@@ -60,24 +58,25 @@ namespace Schatzoeken.Control
 
         public List<Model.Person> GetPersonsFromHighscore()
         {
+            //werkt niet
+            persons.OrderBy(p => p.GetScore()).ToList().Reverse();
             return persons;
         }
 
-        private async void save()
+        private async void savePerson()
         {
             var _Option = Windows.Storage.CreationCollisionOption.ReplaceExisting;
-            var _File = await dataPath.CreateFileAsync(pad, _Option);
+            var _File = await dataPath.CreateFileAsync(padPlayers, _Option);
             string fileText = "";
             foreach (Model.Person person in persons)
-                fileText += person.Name + "\r\n" + person.getScore().ToString() + "\r\n";
+                fileText += person.Name + "\r\n" + person.GetScore().ToString() + "\r\n";
             await Windows.Storage.FileIO.WriteTextAsync(_File, fileText);
         }
 
-        public async void Save(Model.Person person)
+        public async void SavePerson(Model.Person person)
         {
             persons.Add(person);
-            persons = persons.OrderBy(p => p.getScore()).ToList();
-            save();
+            savePerson();
         }
     }    
 }
