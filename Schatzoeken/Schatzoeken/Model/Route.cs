@@ -22,7 +22,7 @@ namespace Schatzoeken.Model
 
         private void fillTreasureRoute()
         {
-            waypoints.Add(new Waypoint(new Bing.Maps.Location(51.587733, 4.782515)));
+            waypoints.Add(new Waypoint(new Bing.Maps.Location(51.587733, 4.782515))); //start
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.588315, 4.778466)));
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.587141, 4.775751)));
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.588121, 4.772897)));
@@ -34,7 +34,8 @@ namespace Schatzoeken.Model
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.592447, 4.779294)));
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.592194, 4.778372)));
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591277, 4.779482)));
-            waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591201, 4.780453)));
+            waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591201, 4.780453)));//laatste punt route
+
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591724, 4.780459)));//treasure
         }
 
