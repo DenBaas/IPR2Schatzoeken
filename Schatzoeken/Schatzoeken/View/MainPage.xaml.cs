@@ -96,7 +96,10 @@ namespace Schatzoeken
             switch(commandId)
             {
                 case "1":
-                    pop.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, ()=>
+                    {
+                        pop.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    }).AsTask().Wait();
                     pop.setHintText("Hint");
                     break;
                 case "2":
