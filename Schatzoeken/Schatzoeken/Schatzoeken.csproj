@@ -150,6 +150,7 @@
     <Content Include="Assets\hintPaper.jpg" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\map2.png" />
+    <Content Include="Resources\hintPaper.jpg" />
     <Content Include="Resources\map1.jpg" />
     <Content Include="Resources\map2.png" />
     <Content Include="Resources\miniMap.png" />

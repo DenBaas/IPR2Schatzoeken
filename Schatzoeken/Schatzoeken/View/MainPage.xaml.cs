@@ -104,34 +104,46 @@ namespace Schatzoeken
             }
         }
             
-        private void routeObjectFound(double x, double y)
+        private void routeObjectFound(Geofence geofence)
         {
             try
             {
-                List<RouteObject> lijst = Controller.GetController().Route.GetRouteObjects();
+                Debug.Print("routeObjectfounf");
+                List<RouteObject> lijst = Controller.GetController().route.GetRouteObjects();
                 RouteObject o = null;
                 foreach (RouteObject r in lijst)
-                {
-                    if (x == r.Location.Location.Latitude && y == r.Location.Location.Longitude)
+                    if (geofence == r.getGeofence())
                     {
                         o = r;
                         break;
                     }
-                }
                 if (o != null)
                     if (o.GetType() != typeof(Monster) && o.IsVisited())
                         return;
-                o.Action();                
-                hints.Items.Add(o.GetInformation());
+                o.Action();   
                 if(Controller.GetController().GameEnded)
                 {
-
+                    Controller.GetController().EndGame();
+                    Controller.GetController().Person = new Person();
+                    this.Frame.Navigate(typeof(View.BlankPage1));
+                    return;
+                }
+                else
+                {
+                    setTextOfScore();
+                    hints.DataContext += o.GetInformation();
+                    //iets met de tekst in o enzo...
                 }
             }
             catch(Exception e)
             {
                 Debug.Print(e);
             }
+        }
+
+        private void setTextOfScore()
+        {
+            score.Text = "De score van " + Controller.GetController().Person.Name + " is: " + Controller.GetController().Person.GetScore();
         }
 
         private async void geoLocation_PositionChanged(Geolocator sender, PositionChangedEventArgs e)
@@ -146,7 +158,8 @@ namespace Schatzoeken
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+            Controller.GetController().GameEnded = false;
+            setTextOfScore();
         }
 
         public async void changeUserLocation(Waypoint userPoint)
@@ -163,11 +176,12 @@ namespace Schatzoeken
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            routeObjectFound(51.591724, 4.780459);
+            routeObjectFound(Controller.GetController().route.GetRouteObjects()[0].getGeofence());
         }
 
         public IAsyncOperation<IUICommand> message { get; set; }

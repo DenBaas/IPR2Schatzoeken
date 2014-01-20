@@ -11,15 +11,15 @@ namespace Schatzoeken.Control
 {
     public class Controller
     {
-        public Route Route;
         public Person Person = new Person("baas");
+        public Route route;
         public bool GameEnded = false;
         //singleton
         private static Controller controller = null;
 
         private Controller()
         {
-            Route = new Route();
+            route = new Route();
         }
 
         public static Controller GetController()
@@ -32,14 +32,14 @@ namespace Schatzoeken.Control
         public void EndGame()
         {
             DataReader.GetDataReader().SavePerson(Person);
-
+            route = new Route();
             GameEnded = true;
         }
 
         public List<Geofence> getGeofences()
         {
             List<Geofence> geofences = new List<Geofence>();
-            foreach(RouteObject r in Route.GetRouteObjects())
+            foreach(RouteObject r in route.GetRouteObjects())
             {
                 geofences.Add(r.getGeofence());
             }
