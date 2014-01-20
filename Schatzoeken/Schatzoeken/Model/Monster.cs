@@ -13,7 +13,8 @@ namespace Schatzoeken.Model
     {
         public readonly int HitPoints;
 
-        public Monster(string newMonster, Geofence newGeo, int newHitPoints, Waypoint waypoint) : base(newMonster,newGeo, waypoint)
+        public Monster(string newMonster, Geofence newGeo, int newHitPoints) 
+            : base(newMonster,newGeo)
         {
             this.HitPoints = newHitPoints;
         }

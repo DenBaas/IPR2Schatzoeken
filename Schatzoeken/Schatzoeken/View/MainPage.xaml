@@ -31,7 +31,7 @@
                     <RowDefinition Height="95*"/>
                 </Grid.RowDefinitions>
                 <TextBox Text="Hints" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False" Background="Transparent" BorderBrush="Transparent" Foreground="#00000000"/>
-                    <ListBox HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="False"/>
+                    <ListBox HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="False" SelectionChanged="ListBox_SelectionChanged"/>
             </Grid>
         </Grid>
     </Grid>

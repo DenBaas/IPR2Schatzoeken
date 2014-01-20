@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation.Geofencing;
 using Bing.Maps.Directions;
+using Bing.Maps;
 
 namespace Schatzoeken.Model
 {
@@ -13,11 +14,9 @@ namespace Schatzoeken.Model
         private string information;
         private Geofence geofence;
         private bool visited = false;
-        public readonly Waypoint Location;
 
-        public RouteObject(string newInformation, Geofence newGeo, Waypoint waypoint)
+        public RouteObject(string newInformation, Geofence newGeo)
         {
-            Location = waypoint;
             this.information = newInformation;
             this.geofence = newGeo;
         }
@@ -30,6 +29,11 @@ namespace Schatzoeken.Model
         public bool isVisited()
         {
             return visited;
+        }
+
+        public Geofence getGeofence()
+        {
+            return this.geofence;
         }
 
         public abstract void Action();
