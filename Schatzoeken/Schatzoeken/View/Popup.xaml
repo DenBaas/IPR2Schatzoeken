@@ -1,13 +1,32 @@
-﻿<Page x:Name="PopupPage"
+﻿<UserControl 
+    x:Name="PopupPage"
     x:Class="Schatzoeken.View.Popup"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Schatzoeken.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    mc:Ignorable="d"
+    d:DesignHeight ="200"
+    d:DesignWidth ="400">
+    
+    <Grid x:Name="PopupControl">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="map2.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="TitleBlock" Foreground="Black" Grid.Row="0" Margin="10" FontSize="24" Width="300" HorizontalAlignment="Left"/>
+        <Button Grid.Row="0" Foreground="Black" Background="LightGray"  Content="X" Margin="10" Tapped="PopUpClosed" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalAlignment="Top" Foreground="Black" Width="Auto" Height="Auto" MaxWidth="700">
+                <TextBlock x:Name="InformationBlock" TextWrapping="WrapWholeWords" FontSize="16" Margin="10,10,10,10" />
+            </ScrollViewer>
+        </Grid>
     </Grid>
-</Page>
+</UserControl>

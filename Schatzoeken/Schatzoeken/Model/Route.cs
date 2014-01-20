@@ -33,7 +33,7 @@ namespace Schatzoeken.Model
                 {
                     Latitude = 51.588315, 
                     Longitude = 4.778466
-                }, 10), mask, false)));
+                }, 10), mask, false,new TimeSpan(1))));
             routeObjects.Add(new Hint("hint 3", new Geofence("Hint3", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.587141,

@@ -34,6 +34,7 @@ namespace Schatzoeken
         private UserLocationIcon icon = new UserLocationIcon();
         private Geolocator geoLocation = new Geolocator();
         private Waypoint currentPoint = new Waypoint(new Bing.Maps.Location());
+        private Schatzoeken.View.Popup pop = new Schatzoeken.View.Popup();
 
         public MainPage()
         {
@@ -62,10 +63,14 @@ namespace Schatzoeken
 
         private async void OnGeofenceStateChanged(GeofenceMonitor sender, object args)
         {
+            UICommand showHintCommand = new UICommand("toon Hint", new UICommandInvokedHandler(commandHandler));
+            UICommand closeHintCommand = new UICommand("sluit Hint", new UICommandInvokedHandler(commandHandler));
+            showHintCommand.Id = 1;
+            closeHintCommand.Id = 2;
+
             var reports = sender.ReadReports();
-            MessageDialog msg = new MessageDialog("Ge staat er in kut!");
             await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                () =>
+                async () =>
                 {
                     foreach(GeofenceStateChangeReport report in reports)
                     {
@@ -73,34 +78,32 @@ namespace Schatzoeken
                         Geofence geo = report.Geofence;
                         if(state == GeofenceState.Entered)
                         {
-                            msg.ShowAsync();
+                            var msg = new MessageDialog(geo.Id);
+
+                            msg.Commands.Add(showHintCommand);
+                            msg.Commands.Add(closeHintCommand);
+                            this.message = msg.ShowAsync();
+                            await this.message;
                             Debug.Print("Hij doet het wel, waarom niet in beeld dan jonguh?");
                         }
                     }
                 });
         }
-            
-            /*{
-            IReadOnlyCollection<GeofenceStateChangeReport> reports = GeofenceMonitor.Current.ReadReports();
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+
+        private void commandHandler(IUICommand command)
+        {
+            var commandId = command.Id.ToString();
+            switch(commandId)
             {
-                foreach(GeofenceStateChangeReport report in reports)
-                {
-                    GeofenceState state = report.NewState;
-                    Geofence geo = report.Geofence;
-                    
-                    if(state == GeofenceState.Entered)
-                    {
-                        new MessageDialog("Je staat in de geofence!!","Geofence Triggered");
-                    }
-                    if(state == GeofenceState.Exited)
-                    {
-
-                    }
-                }
-            });
-        }*/
-
+                case "1":
+                    pop.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    pop.setHintText("Hint");
+                    break;
+                case "2":
+                    break;
+            }
+        }
+            
         private void routeObjectFound(double x, double y)
         {
             try
@@ -166,5 +169,7 @@ namespace Schatzoeken
         {
             routeObjectFound(51.591724, 4.780459);
         }
+
+        public IAsyncOperation<IUICommand> message { get; set; }
     }
 }
