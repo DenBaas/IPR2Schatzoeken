@@ -16,13 +16,17 @@ namespace Schatzoeken.Model
         public Monster(string newMonster, Geofence newGeo, int newHitPoints) 
             : base(newMonster,newGeo)
         {
-            this.HitPoints = newHitPoints;
+            if (newHitPoints > 0)
+                this.HitPoints = -1 * newHitPoints;
+            else
+                this.HitPoints = newHitPoints;
         }
 
 
 
         public override void Action()
         {
+            visited = true;
             Controller.GetController().Person.AddScore(HitPoints);
         }
     }

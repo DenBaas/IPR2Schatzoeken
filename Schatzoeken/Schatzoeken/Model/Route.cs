@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
+using Bing.Maps;
 
 namespace Schatzoeken.Model
 {
@@ -111,21 +112,6 @@ namespace Schatzoeken.Model
 
 
             return route;
-        }
-
-        public void AddHint(Hint newhint)
-        {
-            routeObjects.Add(newhint);
-        }
-
-        public void AddMonster(Monster newMonster)
-        {
-            routeObjects.Add(newMonster);
-        }
-
-        public void AddTreasure(Treasure newTr)
-        {
-            routeObjects.Add(newTr);
         }
 
         public List<RouteObject> GetRouteObjects()

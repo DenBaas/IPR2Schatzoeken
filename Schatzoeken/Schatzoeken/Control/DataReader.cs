@@ -58,9 +58,7 @@ namespace Schatzoeken.Control
 
         public List<Model.Person> GetPersonsFromHighscore()
         {
-            //werkt niet
-            persons.OrderBy(p => p.GetScore()).ToList().Reverse();
-            return persons;
+            return (persons = persons.OrderByDescending(p => p.GetScore()).ThenBy(p => p.Name).ToList());
         }
 
         private async void savePerson()
