@@ -63,7 +63,6 @@ namespace Schatzoeken
         private async void OnGeofenceStateChanged(GeofenceMonitor sender, object args)
         {
             var reports = sender.ReadReports();
-            MessageDialog msg = new MessageDialog("Ge staat er in kut!");
             await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
                 () =>
                 {
@@ -73,62 +72,52 @@ namespace Schatzoeken
                         Geofence geo = report.Geofence;
                         if(state == GeofenceState.Entered)
                         {
-                            msg.ShowAsync();
                             Debug.Print("Hij doet het wel, waarom niet in beeld dan jonguh?");
                         }
                     }
                 });
         }
-            
-            /*{
-            IReadOnlyCollection<GeofenceStateChangeReport> reports = GeofenceMonitor.Current.ReadReports();
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                foreach(GeofenceStateChangeReport report in reports)
-                {
-                    GeofenceState state = report.NewState;
-                    Geofence geo = report.Geofence;
-                    
-                    if(state == GeofenceState.Entered)
-                    {
-                        new MessageDialog("Je staat in de geofence!!","Geofence Triggered");
-                    }
-                    if(state == GeofenceState.Exited)
-                    {
 
-                    }
-                }
-            });
-        }*/
-
-        private void routeObjectFound(double x, double y)
+        private void routeObjectFound(Geofence geofence)
         {
             try
             {
-                List<RouteObject> lijst = Controller.GetController().Route.GetRouteObjects();
+                Debug.Print("routeObjectfounf");
+                List<RouteObject> lijst = Controller.GetController().route.GetRouteObjects();
                 RouteObject o = null;
                 foreach (RouteObject r in lijst)
-                {
-                    if (x == r.Location.Location.Latitude && y == r.Location.Location.Longitude)
+                    if (geofence == r.getGeofence())
                     {
                         o = r;
                         break;
                     }
-                }
                 if (o != null)
                     if (o.GetType() != typeof(Monster) && o.IsVisited())
                         return;
-                o.Action();                
-                hints.Items.Add(o.GetInformation());
+                o.Action();   
                 if(Controller.GetController().GameEnded)
                 {
-
+                    Controller.GetController().EndGame();
+                    Controller.GetController().Person = new Person();
+                    this.Frame.Navigate(typeof(View.BlankPage1));
+                    return;
+                }
+                else
+                {
+                    setTextOfScore();
+                    hints.DataContext += o.GetInformation();
+                    //iets met de tekst in o enzo...
                 }
             }
             catch(Exception e)
             {
                 Debug.Print(e);
             }
+        }
+
+        private void setTextOfScore()
+        {
+            score.Text = "De score van " + Controller.GetController().Person.Name + " is: " + Controller.GetController().Person.GetScore();
         }
 
         private async void geoLocation_PositionChanged(Geolocator sender, PositionChangedEventArgs e)
@@ -143,7 +132,8 @@ namespace Schatzoeken
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+            Controller.GetController().GameEnded = false;
+            setTextOfScore();
         }
 
         public async void changeUserLocation(Waypoint userPoint)
@@ -160,11 +150,12 @@ namespace Schatzoeken
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            routeObjectFound(51.591724, 4.780459);
+            routeObjectFound(Controller.GetController().route.GetRouteObjects()[0].getGeofence());
         }
     }
 }

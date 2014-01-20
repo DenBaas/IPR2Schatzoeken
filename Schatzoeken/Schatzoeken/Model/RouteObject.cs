@@ -14,20 +14,8 @@ namespace Schatzoeken.Model
         protected string information;
         protected Geofence geofence;
         protected bool visited = false;
-        public readonly Waypoint Location;
-
-        public RouteObject(Waypoint w)
-        {
-            Location = w;
-        }
 
         public RouteObject(string newInformation, Geofence newGeo)
-        {
-            this.information = newInformation;
-            this.geofence = newGeo;
-        }
-
-        public RouteObject(string newInformation, Geofence newGeo, Waypoint waypoint)
         {
             this.information = newInformation;
             this.geofence = newGeo;
