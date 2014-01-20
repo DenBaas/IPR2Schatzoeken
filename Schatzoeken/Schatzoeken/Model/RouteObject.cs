@@ -10,10 +10,15 @@ namespace Schatzoeken.Model
 {
     public abstract class RouteObject
     {
-        private string information;
-        private Geofence geofence;
-        private bool visited = false;
+        protected string information;
+        protected Geofence geofence;
+        protected bool visited = false;
         public readonly Waypoint Location;
+
+        public RouteObject(Waypoint w)
+        {
+            Location = w;
+        }
 
         public RouteObject(string newInformation, Geofence newGeo, Waypoint waypoint)
         {
@@ -22,14 +27,19 @@ namespace Schatzoeken.Model
             this.geofence = newGeo;
         }
 
-        public void setVisited()
+        public void SetVisited()
         {
             this.visited = true;
         }
 
-        public bool isVisited()
+        public bool IsVisited()
         {
             return visited;
+        }
+
+        public string GetInformation()
+        {
+            return information;
         }
 
         public abstract void Action();

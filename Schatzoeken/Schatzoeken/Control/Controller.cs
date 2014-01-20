@@ -9,15 +9,15 @@ namespace Schatzoeken.Control
 {
     public class Controller
     {
-        public Route route;
-        public Person Person = new Person();
-        public int score = 0;
+        public Route Route;
+        public Person Person = new Person("baas");
+        public bool GameEnded = false;
         //singleton
         private static Controller controller = null;
 
         private Controller()
         {
-            route = new Route();
+            Route = new Route();
         }
 
         public static Controller GetController()
@@ -29,12 +29,9 @@ namespace Schatzoeken.Control
 
         public void EndGame()
         {
-
-        }
-
-        public void Save()
-        {
             DataReader.GetDataReader().SavePerson(Person);
+
+            GameEnded = true;
         }
     }
 }

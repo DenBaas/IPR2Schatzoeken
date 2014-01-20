@@ -31,7 +31,10 @@
                     <RowDefinition Height="95*"/>
                 </Grid.RowDefinitions>
                 <TextBox Text="Hints" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False" Background="Transparent" BorderBrush="Transparent" Foreground="#00000000"/>
-                    <ListBox HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="False"/>
+                    <ListBox x:Name="hints" HorizontalAlignment="Left"  VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="False">
+                    
+                </ListBox>
+                <Button Content="test" Height="99" Width="137" Click="Button_Click"/>
             </Grid>
         </Grid>
     </Grid>

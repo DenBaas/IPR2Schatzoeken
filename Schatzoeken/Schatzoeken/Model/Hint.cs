@@ -21,6 +21,7 @@ namespace Schatzoeken.Model
 
         public override void Action()
         {
+            visited = true;
             Controller.GetController().Person.AddScore(POINTS);
         }
     }

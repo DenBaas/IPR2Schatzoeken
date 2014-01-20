@@ -13,7 +13,7 @@ namespace Schatzoeken.Model
     public class Route
     {
         private List<Waypoint> waypoints = new List<Waypoint>();
-        private Dictionary<Location, RouteObject> locationsWithRouteObjects = new Dictionary<Bing.Maps.Location, RouteObject>();
+        private List<RouteObject> locationsWithRouteObjects = new List<RouteObject>();
 
         public Route()
         {
@@ -36,7 +36,8 @@ namespace Schatzoeken.Model
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591277, 4.779482)));
             waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591201, 4.780453)));//laatste punt route
 
-            waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591724, 4.780459)));//treasure
+            waypoints.Add(new Waypoint(new Bing.Maps.Location(51.591724, 4.780459)));//treasure --- in debug
+            locationsWithRouteObjects.Add(new Treasure("gevonden", 300, waypoints[13]));
         }
 
         public static Route GETSTANDARDROUTE()
@@ -52,7 +53,7 @@ namespace Schatzoeken.Model
             return route;
         }
 
-        public Dictionary<Location, RouteObject> LocationsWithRouteObjects()
+        public List<RouteObject> LocationsWithRouteObjects()
         {
             return locationsWithRouteObjects;
         }

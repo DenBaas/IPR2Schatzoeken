@@ -18,6 +18,7 @@ using Windows.Devices.Geolocation;
 using Bing.Maps.Directions;
 using Bing.Maps;
 using Windows.Devices.Geolocation.Geofencing;
+using Schatzoeken.Model;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -72,6 +73,36 @@ namespace Schatzoeken
             });
         }
 
+        private void routeObjectFound(double x, double y)
+        {
+            try
+            {
+                List<RouteObject> lijst = Controller.GetController().Route.LocationsWithRouteObjects();
+                RouteObject o = null;
+                foreach (RouteObject r in lijst)
+                {
+                    if (x == r.Location.Location.Latitude && y == r.Location.Location.Longitude)
+                    {
+                        o = r;
+                        break;
+                    }
+                }
+                if (o != null)
+                    if (o.GetType() != typeof(Monster) && o.IsVisited())
+                        return;
+                o.Action();                
+                hints.Items.Add(o.GetInformation());
+                if(Controller.GetController().GameEnded)
+                {
+
+                }
+            }
+            catch(Exception e)
+            {
+                Debug.Print(e);
+            }
+        }
+
         private async void geoLocation_PositionChanged(Geolocator sender, PositionChangedEventArgs e)
         {
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
@@ -97,6 +128,11 @@ namespace Schatzoeken
                     userPoint.Location.Longitude);
                 map.ZoomLevel = 16.0f;
             });
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            routeObjectFound(51.591724, 4.780459);
         }
     }
 }
