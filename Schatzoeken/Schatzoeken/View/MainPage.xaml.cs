@@ -34,7 +34,8 @@ namespace Schatzoeken
         private UserLocationIcon icon = new UserLocationIcon();
         private Geolocator geoLocation = new Geolocator();
         private Waypoint currentPoint = new Waypoint(new Bing.Maps.Location());
-        private Schatzoeken.View.Popup pop = new Schatzoeken.View.Popup();
+        private List<RouteObject> routeObjectList = Control.Controller.GetController().getRouteObjectList();
+        PopupPage pop = new PopupPage();
 
         public MainPage()
         {
@@ -42,6 +43,8 @@ namespace Schatzoeken
 
             map.Children.Add(layer);
             map.Children.Add(icon);
+            map.Children.Add(pop);
+            pop.Visibility = Visibility.Collapsed;
 
             geoLocation.PositionChanged +=
                 new TypedEventHandler<Geolocator,
@@ -84,7 +87,16 @@ namespace Schatzoeken
                             msg.Commands.Add(closeHintCommand);
                             this.message = msg.ShowAsync();
                             await this.message;
-                            Debug.Print("Hij doet het wel, waarom niet in beeld dan jonguh?");
+
+                            foreach(RouteObject r in routeObjectList)
+                            {
+                                if(r.getGeofence() == geo)
+                                {
+                                    pop.setInformationText(r.GetInformation());
+                                    pop.setHintText("Hint");
+                                    hints.Items.Add(r.getTitle());
+                                }
+                            }
                         }
                     }
                 });
@@ -98,9 +110,8 @@ namespace Schatzoeken
                 case "1":
                     this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, ()=>
                     {
-                        pop.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                        pop.Visibility = Visibility.Visible;
                     }).AsTask().Wait();
-                    pop.setHintText("Hint");
                     break;
                 case "2":
                     break;
@@ -145,7 +156,7 @@ namespace Schatzoeken
 
         private void setTextOfScore()
         {
-            score.Text = "De score van " + Controller.GetController().Person.Name + " is: " + Controller.GetController().Person.GetScore();
+            //score.Text = "De score van " + Controller.GetController().Person.Name + " is: " + Controller.GetController().Person.GetScore();
         }
 
         private async void geoLocation_PositionChanged(Geolocator sender, PositionChangedEventArgs e)
@@ -178,12 +189,22 @@ namespace Schatzoeken
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            foreach(RouteObject r in routeObjectList)
+            {
+                if(r.getTitle() == hints.SelectedItem.ToString())
+                {
+                    pop.setInformationText(r.GetInformation());
+                    pop.setHintText("Hint");
+                    pop.Visibility = Visibility.Visible;
+                }
+            }
         }
+
+        //nipples = ((ListBoxItem)lst_department.SelectedValue).Content.ToString();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            routeObjectFound(Controller.GetController().route.GetRouteObjects()[14].getGeofence());
+            routeObjectFound(Controller.GetController().route.GetRouteObjects()[0].getGeofence());
         }
 
         public IAsyncOperation<IUICommand> message { get; set; }

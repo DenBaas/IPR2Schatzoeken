@@ -27,11 +27,11 @@
                     <ImageBrush Stretch="Fill" ImageSource="/Resources/hintPaper.jpg" />
                 </Grid.Background>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="95*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="90*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="score" Text="" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False" Background="Transparent" BorderBrush="Transparent" Foreground="White"/>
-                <ListBox x:Name="hints" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="true" SelectionChanged="ListBox_SelectionChanged" Foreground="White"/>
+                <TextBox x:Name="score" Text="Hints" FontSize="60" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False" Background="Transparent" BorderBrush="Transparent" Foreground="White" BorderThickness="0"/>
+                <ListBox x:Name="hints" HorizontalAlignment="Left" Margin="60,0,60,100" VerticalAlignment="Stretch" Background="Transparent" Grid.Row="1" IsEnabled="False" SelectionChanged="ListBox_SelectionChanged" Foreground="Black" FontSize="40" BorderThickness="0"/>
                 <Button Content="test" HorizontalAlignment="Left" Height="28" Margin="10,0,0,0" VerticalAlignment="Top" Width="153" Click="Button_Click"/>
             </Grid>
         </Grid>

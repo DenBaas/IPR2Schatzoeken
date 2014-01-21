@@ -20,9 +20,9 @@ namespace Schatzoeken.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Popup : UserControl
+    public sealed partial class PopupPage : UserControl
     {
-        public Popup()
+        public PopupPage()
         {
             this.InitializeComponent();
         }
@@ -34,7 +34,18 @@ namespace Schatzoeken.View
 
         public void setHintText(string hintInfo)
         {
-            TitleBlock.Text = hintInfo;
+            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                TitleBlock.Text = hintInfo;
+            });
+        }
+
+        public void setInformationText(String information)
+        {
+            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                InformationBlock.Text = information;
+            });
         }
     }
 }

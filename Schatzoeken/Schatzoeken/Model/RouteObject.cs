@@ -11,13 +11,14 @@ namespace Schatzoeken.Model
 {
     public abstract class RouteObject
     {
-        protected string information;
+        protected string information,title;
         protected Geofence geofence;
         protected bool visited = false;
 
-        public RouteObject(string newInformation, Geofence newGeo)
+        public RouteObject(string newInformation, string newTitle, Geofence newGeo)
         {
             this.information = newInformation;
+            this.title = newTitle;
             this.geofence = newGeo;
         }
 
@@ -39,6 +40,11 @@ namespace Schatzoeken.Model
         public string GetInformation()
         {
             return information;
+        }
+
+        public string getTitle()
+        {
+            return title;
         }
 
         public abstract void Action();
