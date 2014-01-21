@@ -45,5 +45,10 @@ namespace Schatzoeken.Control
             }
             return geofences;
         }
+
+        public List<RouteObject> getRouteObjectList()
+        {
+            return route.GetRouteObjects();
+        }
     }
 }

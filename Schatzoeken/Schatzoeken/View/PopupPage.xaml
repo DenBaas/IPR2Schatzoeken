@@ -1,6 +1,5 @@
-﻿<UserControl 
-    x:Name="PopupPage"
-    x:Class="Schatzoeken.View.Popup"
+﻿<UserControl
+    x:Class="Schatzoeken.View.PopupPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Schatzoeken.View"
@@ -10,10 +9,7 @@
     d:DesignHeight ="200"
     d:DesignWidth ="400">
     
-    <Grid x:Name="PopupControl">
-        <Grid.Background>
-            <ImageBrush Stretch="Fill" ImageSource="map2.png"/>
-        </Grid.Background>
+    <Grid x:Name="PopupControl" Background="AntiqueWhite">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>

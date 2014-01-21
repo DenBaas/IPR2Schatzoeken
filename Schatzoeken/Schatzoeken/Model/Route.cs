@@ -23,81 +23,76 @@ namespace Schatzoeken.Model
         {
             MonitoredGeofenceStates mask = MonitoredGeofenceStates.Entered | MonitoredGeofenceStates.Exited;
 
-            routeObjects.Add(new Hint("hint 1",new Geofence("Hint1",new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 1",new Geofence("Hint 1",new Geocircle(new BasicGeoposition
                 {
                     Latitude = 51.587733, 
                     Longitude = 4.782515
                 },10),mask,false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 2", new Geofence("Hint2", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("Bij deze plaats moet je 100 meter naar rechts en dan 500 meter rechtdoor!","Hint 2", new Geofence("Hint 2", new Geocircle(new BasicGeoposition
                 {
                     Latitude = 51.588315, 
                     Longitude = 4.778466
                 }, 10), mask, false,new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 3", new Geofence("Hint3", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 3" , new Geofence("Hint 3", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.587141,
                 Longitude = 4.775751
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 4", new Geofence("Hint4", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 4", new Geofence("Hint 4", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.588121,
                 Longitude = 4.772897
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 5", new Geofence("Hint5", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 5", new Geofence("Hint 5", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.589341,
                 Longitude = 4.774378
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 6", new Geofence("Hint6", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 6", new Geofence("Hint 6", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.589508,
                 Longitude = 4.776384
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 7", new Geofence("Hint7", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 7", new Geofence("Hint 7", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.590348,
                 Longitude = 4.776159
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 8", new Geofence("Hint8", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 8", new Geofence("Hint 8", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.590588,
                 Longitude = 4.777570
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 9", new Geofence("Hint9", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 9", new Geofence("Hint 9", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.591834,
                 Longitude = 4.777658
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 10", new Geofence("Hint10", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 10", new Geofence("Hint 10", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.592447,
                 Longitude = 4.779294
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 11", new Geofence("Hint11", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 11", new Geofence("Hint 11", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.592194,
                 Longitude = 4.778372
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 12", new Geofence("Hint12", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 12", new Geofence("Hint 12", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.591277,
                 Longitude = 4.779482
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 13", new Geofence("Hint13", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("","Hint 13", new Geofence("Hint 13", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.591201,
                 Longitude = 4.780453
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Hint("hint 14", new Geofence("Hint14", new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("Woohoo je hebt de schat gevonden!!!","De schat!", new Geofence("Hint 14", new Geocircle(new BasicGeoposition
             {
                 Latitude = 51.591724,
                 Longitude = 4.780459
             }, 10), mask, false, new TimeSpan(1))));
-            routeObjects.Add(new Treasure("treasure 15", new Geofence("Hint15", new Geocircle(new BasicGeoposition
-            {
-                Latitude = 51.585977,
-                Longitude = 4.791461
-            }, 50), mask, false, new TimeSpan(1)), 300));
         }
 
         public static Route GETSTANDARDROUTE()
