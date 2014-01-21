@@ -81,23 +81,12 @@ namespace Schatzoeken
                         Geofence geo = report.Geofence;
                         if(state == GeofenceState.Entered)
                         {
-                            var msg = new MessageDialog(geo.Id);
                             routeObjectFound(geo);
+                            var msg = new MessageDialog(geo.Id);
                             msg.Commands.Add(showHintCommand);
                             msg.Commands.Add(closeHintCommand);
                             this.message = msg.ShowAsync();
                             await this.message;
-
-                            foreach(RouteObject r in routeObjectList)
-                            {
-                                if(r.getGeofence() == geo)
-                                {
-                                    pop.setInformationText(r.GetInformation());
-                                    pop.setHintText("Hint");
-                                    MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude,currentPoint.Location.Longitude));
-                                    hints.Items.Add(r.getTitle());
-                                }
-                            }
                         }
                     }
                 });
@@ -119,45 +108,32 @@ namespace Schatzoeken
             }
         }
             
-        private void routeObjectFound(Geofence geofence)
+        private void routeObjectFound(Geofence geo)
         {
             try
             {
-                List<RouteObject> lijst = Controller.GetController().route.GetRouteObjects();
-                RouteObject o = null;
-                foreach (RouteObject r in lijst)
-                    if (geofence == r.getGeofence())
+                foreach (RouteObject r in routeObjectList)
+                {
+                    if (r.getGeofence() == geo)
                     {
-                        o = r;
-                        break;
+                        r.Action();   
+                        pop.setInformationText(r.GetInformation());
+                        pop.setHintText("Hint");
+                        MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
+                        hints.Items.Add(r.getTitle());
+                        if (Controller.GetController().GameEnded)
+                        {
+                            Controller.GetController().EndGame();
+                            this.Frame.Navigate(typeof(View.BlankPage1));
+                        }
+                        return;
                     }
-                if (o == null)
-                    return;
-                if (o.GetType() != typeof(Monster) && o.IsVisited())
-                    return;
-                o.Action();   
-                if(Controller.GetController().GameEnded)
-                {
-                    Controller.GetController().EndGame();
-                    this.Frame.Navigate(typeof(View.BlankPage1));
-                    return;
-                }
-                else
-                {
-                    setTextOfScore();
-                    hints.DataContext += o.GetInformation();
-                    //iets met de tekst in o enzo...
                 }
             }
             catch(Exception e)
             {
                 Debug.Print(e);
             }
-        }
-
-        private void setTextOfScore()
-        {
-            //score.Text = "De score van " + Controller.GetController().Person.Name + " is: " + Controller.GetController().Person.GetScore();
         }
 
         private async void geoLocation_PositionChanged(Geolocator sender, PositionChangedEventArgs e)
@@ -173,7 +149,6 @@ namespace Schatzoeken
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             Controller.GetController().GameEnded = false;
-            setTextOfScore();
         }
 
         public async void changeUserLocation(Waypoint userPoint)
@@ -204,11 +179,6 @@ namespace Schatzoeken
                         }
                     }
                 });
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            routeObjectFound(Controller.GetController().route.GetRouteObjects()[0].getGeofence());
         }
 
         public IAsyncOperation<IUICommand> message { get; set; }
