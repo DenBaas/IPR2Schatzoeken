@@ -14,7 +14,7 @@ namespace Schatzoeken.Model
         public readonly int HitPoints;
 
         public Monster(string newMonster,string newTitle, Geofence newGeo, int newHitPoints) 
-            : base(newMonster,newTitle,newGeo)
+            : base(newMonster,newTitle,newGeo, false)
         {
             if (newHitPoints > 0)
                 this.HitPoints = -1 * newHitPoints;

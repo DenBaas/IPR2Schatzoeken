@@ -14,12 +14,14 @@ namespace Schatzoeken.Model
         protected string information,title;
         protected Geofence geofence;
         protected bool visited = false;
+        protected bool isHint = false;
 
-        public RouteObject(string newInformation, string newTitle, Geofence newGeo)
+        public RouteObject(string newInformation, string newTitle, Geofence newGeo, bool isNotMonster)
         {
             this.information = newInformation;
             this.title = newTitle;
             this.geofence = newGeo;
+            this.isHint = isNotMonster;
         }
 
         public void SetVisited()
@@ -45,6 +47,11 @@ namespace Schatzoeken.Model
         public string getTitle()
         {
             return title;
+        }
+
+        public bool getIsHint()
+        {
+            return isHint;
         }
 
         public abstract void Action();

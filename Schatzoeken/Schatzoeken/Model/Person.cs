@@ -44,8 +44,6 @@ namespace Schatzoeken.Model
             else
                 treasuresFound++;
             score += points;
-            if (score < 0)
-                points = 0;
         }
 
         public int GetHitsOfMonsters()

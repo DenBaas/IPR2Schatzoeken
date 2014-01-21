@@ -36,7 +36,7 @@ namespace Schatzoeken
         private Geolocator geoLocation = new Geolocator();
         private Waypoint currentPoint = new Waypoint(new Bing.Maps.Location());
         private List<RouteObject> routeObjectList = Control.Controller.GetController().getRouteObjectList();
-        PopupPage pop = new PopupPage();
+        //PopupPage pop = new PopupPage();
 
         public MainPage()
         {
@@ -45,14 +45,14 @@ namespace Schatzoeken
             map.Children.Add(layer);
             map.Children.Add(icon);
 
-            pop.Visibility = Visibility.Collapsed;
-
-            geoLocation.PositionChanged +=
-                new TypedEventHandler<Geolocator,
+            geoLocation.PositionChanged += new TypedEventHandler<Geolocator,
                     PositionChangedEventArgs>(geoLocation_PositionChanged);
             GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+        }
 
-            List<Geofence> geos =  Control.Controller.GetController().getGeofences();
+        private void startGame()
+        {
+            List<Geofence> geos = Control.Controller.GetController().getGeofences();
             GeofenceMonitor.Current.Geofences.Clear();
 
             foreach (Geofence g in geos)
@@ -60,7 +60,7 @@ namespace Schatzoeken
                 Debug.Print("Het Geo id: " + g.Id);
                 if (!GeofenceMonitor.Current.Geofences.Contains(g))
                 {
-                    GeofenceMonitor.Current.Geofences.Add(g); 
+                    GeofenceMonitor.Current.Geofences.Add(g);
                 }
             }
         }
@@ -82,10 +82,15 @@ namespace Schatzoeken
                         Geofence geo = report.Geofence;
                         if(state == GeofenceState.Entered)
                         {
+                            var msg = new MessageDialog("");
                             routeObjectFound(geo);
-                            var msg = new MessageDialog(geo.Id);
-                            msg.Commands.Add(showHintCommand);
-                            msg.Commands.Add(closeHintCommand);
+                            foreach (RouteObject r in routeObjectList)
+                            {   
+                                if(r.getGeofence() == geo)
+                                    msg = new MessageDialog(r.getTitle());
+                            }
+                            //msg.Commands.Add(showHintCommand);
+                            //msg.Commands.Add(closeHintCommand);
                             this.message = msg.ShowAsync();
                             await this.message;
                         }
@@ -101,7 +106,7 @@ namespace Schatzoeken
                 case "1":
                     this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, ()=>
                     {
-                        pop.Visibility = Visibility.Visible;
+                        //pop.Visibility = Visibility.Visible;
                     }).AsTask().Wait();
                     break;
                 case "2":
@@ -118,14 +123,16 @@ namespace Schatzoeken
                     if (r.getGeofence() == geo)
                     {
                         r.Action();
+                        PopupPage pop = new PopupPage();
                         pop.setInformationText(r.GetInformation());
-                        pop.setHintText("Hint");
+                        pop.setHintText(r.getTitle());
                         layer.Children.Add(pop);
                         MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
-                        hints.Items.Add(r.getTitle());
+                        if(r.getIsHint())
+                            hints.Items.Add(r.getTitle());
                         if (Controller.GetController().GameEnded)
                         {
-                            Controller.GetController().EndGame();
+                            Controller.GetController().EndGame(true);
                             this.Frame.Navigate(typeof(View.BlankPage1));
                         }
                         return;
@@ -151,6 +158,7 @@ namespace Schatzoeken
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             Controller.GetController().GameEnded = false;
+            startGame();
         }
 
         public async void changeUserLocation(Waypoint userPoint)
@@ -197,6 +205,12 @@ namespace Schatzoeken
             SolidColorBrush color = new SolidColorBrush();
             color.Color = Colors.Transparent;
             hints.Background = color;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Controller.GetController().EndGame(false);
+            this.Frame.Navigate(typeof(View.BlankPage1));
         }
     }
 }
