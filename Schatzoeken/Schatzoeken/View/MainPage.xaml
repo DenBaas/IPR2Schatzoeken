@@ -31,7 +31,6 @@
                 </Grid.RowDefinitions>
                 <TextBox x:Name="score" Text="Hints" FontSize="60" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False" Background="Transparent" BorderBrush="Transparent" Foreground="White" BorderThickness="0"/>
                 <ListBox x:Name="hints" IsEnabled="True" HorizontalAlignment="Left" Margin="60,0,60,100" VerticalAlignment="Stretch" Background="Transparent" Grid.Row="1" Tapped="hints_Tapped" SelectionChanged="ListBox_SelectionChanged" Foreground="Black" FontSize="40" BorderThickness="0"/>
-                <Button Content="test" HorizontalAlignment="Left" Height="28" Margin="10,0,0,0" VerticalAlignment="Top" Width="153" Click="Button_Click"/>
             </Grid>
         </Grid>
     </Grid>

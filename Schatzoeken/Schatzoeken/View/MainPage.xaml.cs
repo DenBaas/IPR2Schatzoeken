@@ -36,7 +36,7 @@ namespace Schatzoeken
         private Geolocator geoLocation = new Geolocator();
         private Waypoint currentPoint = new Waypoint(new Bing.Maps.Location());
         private List<RouteObject> routeObjectList = Control.Controller.GetController().getRouteObjectList();
-        //PopupPage pop = new PopupPage();
+        PopupPage pop = new PopupPage();
 
         public MainPage()
         {
@@ -44,6 +44,8 @@ namespace Schatzoeken
 
             map.Children.Add(layer);
             map.Children.Add(icon);
+
+            pop.Visibility = Visibility.Collapsed;
 
             geoLocation.PositionChanged +=
                 new TypedEventHandler<Geolocator,
@@ -80,25 +82,12 @@ namespace Schatzoeken
                         Geofence geo = report.Geofence;
                         if(state == GeofenceState.Entered)
                         {
+                            routeObjectFound(geo);
                             var msg = new MessageDialog(geo.Id);
-                            //routeObjectFound(geo);
-                            //msg.Commands.Add(showHintCommand);
-                            //msg.Commands.Add(closeHintCommand);
+                            msg.Commands.Add(showHintCommand);
+                            msg.Commands.Add(closeHintCommand);
                             this.message = msg.ShowAsync();
                             await this.message;
-
-                            foreach(RouteObject r in routeObjectList)
-                            {
-                                if(r.getGeofence() == geo)
-                                {
-                                    PopupPage pop = new PopupPage();
-                                    pop.setInformationText(r.GetInformation());
-                                    pop.setHintText("Hint");
-                                    layer.Children.Add(pop);
-                                    MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude,currentPoint.Location.Longitude));
-                                    hints.Items.Add(r.getTitle());
-                                }
-                            }
                         }
                     }
                 });
@@ -112,7 +101,7 @@ namespace Schatzoeken
                 case "1":
                     this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, ()=>
                     {
-                        //pop.Visibility = Visibility.Visible;
+                        pop.Visibility = Visibility.Visible;
                     }).AsTask().Wait();
                     break;
                 case "2":
@@ -120,45 +109,33 @@ namespace Schatzoeken
             }
         }
             
-        private void routeObjectFound(Geofence geofence)
+        private void routeObjectFound(Geofence geo)
         {
             try
             {
-                List<RouteObject> lijst = Controller.GetController().route.GetRouteObjects();
-                RouteObject o = null;
-                foreach (RouteObject r in lijst)
-                    if (geofence == r.getGeofence())
+                foreach (RouteObject r in routeObjectList)
+                {
+                    if (r.getGeofence() == geo)
                     {
-                        o = r;
-                        break;
+                        r.Action();
+                        pop.setInformationText(r.GetInformation());
+                        pop.setHintText("Hint");
+                        layer.Children.Add(pop);
+                        MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
+                        hints.Items.Add(r.getTitle());
+                        if (Controller.GetController().GameEnded)
+                        {
+                            Controller.GetController().EndGame();
+                            this.Frame.Navigate(typeof(View.BlankPage1));
+                        }
+                        return;
                     }
-                if (o == null)
-                    return;
-                if (o.GetType() != typeof(Monster) && o.IsVisited())
-                    return;
-                o.Action();   
-                if(Controller.GetController().GameEnded)
-                {
-                    Controller.GetController().EndGame();
-                    this.Frame.Navigate(typeof(View.BlankPage1));
-                    return;
-                }
-                else
-                {
-                    setTextOfScore();
-                    hints.DataContext += o.GetInformation();
-                    //iets met de tekst in o enzo...
                 }
             }
             catch(Exception e)
             {
                 Debug.Print(e);
             }
-        }
-
-        private void setTextOfScore()
-        {
-            //score.Text = "De score van " + Controller.GetController().Person.Name + " is: " + Controller.GetController().Person.GetScore();
         }
 
         private async void geoLocation_PositionChanged(Geolocator sender, PositionChangedEventArgs e)
@@ -174,7 +151,6 @@ namespace Schatzoeken
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             Controller.GetController().GameEnded = false;
-            setTextOfScore();
         }
 
         public async void changeUserLocation(Waypoint userPoint)
@@ -197,26 +173,21 @@ namespace Schatzoeken
             this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, 
                 async ()=>
                 {
-            foreach (RouteObject r in routeObjectList)
-            {
-                if (r.getTitle() == hints.SelectedItem.ToString())
-                {
-                    PopupPage pop = new PopupPage();
-                    pop.Visibility = Visibility.Visible;
-                    pop.setInformationText(r.GetInformation());
-                    pop.setHintText("Hint");
+                    foreach (RouteObject r in routeObjectList)
+                    {
+                        if (r.getTitle() == hints.SelectedItem.ToString())
+                        {
+                            PopupPage pop2 = new PopupPage();
+                            pop2.Visibility = Visibility.Visible;
+                            pop2.setInformationText(r.GetInformation());
+                            pop2.setHintText("Hint");
 
-                    layer.Children.Add(pop);
+                            layer.Children.Add(pop2);
 
-                    MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
-                }
-            }
+                            MapLayer.SetPosition(pop2, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
+                        }
+                    }
                 });
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            routeObjectFound(Controller.GetController().route.GetRouteObjects()[0].getGeofence());
         }
 
         public IAsyncOperation<IUICommand> message { get; set; }
