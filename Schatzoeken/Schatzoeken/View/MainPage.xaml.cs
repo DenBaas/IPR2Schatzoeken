@@ -20,6 +20,7 @@ using Bing.Maps;
 using Windows.Devices.Geolocation.Geofencing;
 using Windows.UI.Popups;
 using Schatzoeken.Model;
+using Windows.UI;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -35,7 +36,7 @@ namespace Schatzoeken
         private Geolocator geoLocation = new Geolocator();
         private Waypoint currentPoint = new Waypoint(new Bing.Maps.Location());
         private List<RouteObject> routeObjectList = Control.Controller.GetController().getRouteObjectList();
-        PopupPage pop = new PopupPage();
+        //PopupPage pop = new PopupPage();
 
         public MainPage()
         {
@@ -43,8 +44,6 @@ namespace Schatzoeken
 
             map.Children.Add(layer);
             map.Children.Add(icon);
-            layer.Children.Add(pop);
-            pop.Visibility = Visibility.Collapsed;
 
             geoLocation.PositionChanged +=
                 new TypedEventHandler<Geolocator,
@@ -82,9 +81,9 @@ namespace Schatzoeken
                         if(state == GeofenceState.Entered)
                         {
                             var msg = new MessageDialog(geo.Id);
-                            routeObjectFound(geo);
-                            msg.Commands.Add(showHintCommand);
-                            msg.Commands.Add(closeHintCommand);
+                            //routeObjectFound(geo);
+                            //msg.Commands.Add(showHintCommand);
+                            //msg.Commands.Add(closeHintCommand);
                             this.message = msg.ShowAsync();
                             await this.message;
 
@@ -92,8 +91,10 @@ namespace Schatzoeken
                             {
                                 if(r.getGeofence() == geo)
                                 {
+                                    PopupPage pop = new PopupPage();
                                     pop.setInformationText(r.GetInformation());
                                     pop.setHintText("Hint");
+                                    layer.Children.Add(pop);
                                     MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude,currentPoint.Location.Longitude));
                                     hints.Items.Add(r.getTitle());
                                 }
@@ -111,7 +112,7 @@ namespace Schatzoeken
                 case "1":
                     this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, ()=>
                     {
-                        pop.Visibility = Visibility.Visible;
+                        //pop.Visibility = Visibility.Visible;
                     }).AsTask().Wait();
                     break;
                 case "2":
@@ -188,21 +189,28 @@ namespace Schatzoeken
             });
         }
 
-        private async void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                () =>
+            SolidColorBrush color = new SolidColorBrush();
+            color.Color = Colors.Transparent;
+            hints.Background = color;
+            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, 
+                async ()=>
                 {
-                    foreach (RouteObject r in routeObjectList)
-                    {
-                        if (r.getTitle() == hints.SelectedItem.ToString())
-                        {
-                            pop.setInformationText(r.GetInformation());
-                            pop.setHintText("Hint");
-                            pop.Visibility = Visibility.Visible;
-                            MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
-                        }
-                    }
+            foreach (RouteObject r in routeObjectList)
+            {
+                if (r.getTitle() == hints.SelectedItem.ToString())
+                {
+                    PopupPage pop = new PopupPage();
+                    pop.Visibility = Visibility.Visible;
+                    pop.setInformationText(r.GetInformation());
+                    pop.setHintText("Hint");
+
+                    layer.Children.Add(pop);
+
+                    MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
+                }
+            }
                 });
         }
 
@@ -212,5 +220,12 @@ namespace Schatzoeken
         }
 
         public IAsyncOperation<IUICommand> message { get; set; }
+
+        private void hints_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            SolidColorBrush color = new SolidColorBrush();
+            color.Color = Colors.Transparent;
+            hints.Background = color;
+        }
     }
 }
