@@ -33,6 +33,7 @@ namespace Schatzoeken.View
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             NameBox.Text = Controller.GetController().Person.Name;
+            NameBox.Height = Start.Height;
             checkIfNameIsCorrect();
         }
 
