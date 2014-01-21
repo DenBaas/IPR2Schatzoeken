@@ -79,7 +79,7 @@ namespace Schatzoeken
                         if(state == GeofenceState.Entered)
                         {
                             var msg = new MessageDialog(geo.Id);
-
+                            routeObjectFound(geo);
                             msg.Commands.Add(showHintCommand);
                             msg.Commands.Add(closeHintCommand);
                             this.message = msg.ShowAsync();
@@ -111,7 +111,6 @@ namespace Schatzoeken
         {
             try
             {
-                Debug.Print("routeObjectfounf");
                 List<RouteObject> lijst = Controller.GetController().route.GetRouteObjects();
                 RouteObject o = null;
                 foreach (RouteObject r in lijst)
@@ -120,14 +119,14 @@ namespace Schatzoeken
                         o = r;
                         break;
                     }
-                if (o != null)
-                    if (o.GetType() != typeof(Monster) && o.IsVisited())
-                        return;
+                if (o == null)
+                    return;
+                if (o.GetType() != typeof(Monster) && o.IsVisited())
+                    return;
                 o.Action();   
                 if(Controller.GetController().GameEnded)
                 {
                     Controller.GetController().EndGame();
-                    Controller.GetController().Person = new Person();
                     this.Frame.Navigate(typeof(View.BlankPage1));
                     return;
                 }
@@ -184,7 +183,7 @@ namespace Schatzoeken
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            routeObjectFound(Controller.GetController().route.GetRouteObjects()[0].getGeofence());
+            routeObjectFound(Controller.GetController().route.GetRouteObjects()[14].getGeofence());
         }
 
         public IAsyncOperation<IUICommand> message { get; set; }

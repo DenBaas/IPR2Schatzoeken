@@ -32,6 +32,7 @@ namespace Schatzoeken.Control
         public void EndGame()
         {
             DataReader.GetDataReader().SavePerson(Person);
+            Person = new Person();
             route = new Route();
             GameEnded = true;
         }
