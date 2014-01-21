@@ -29,7 +29,7 @@ namespace Schatzoeken.View
 
         private void PopUpClosed(object sender, TappedRoutedEventArgs e)
         {
-            PopupControl.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            PopupControl.Visibility = Visibility.Collapsed;
         }
 
         public void setHintText(string hintInfo)

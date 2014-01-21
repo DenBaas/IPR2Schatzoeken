@@ -43,7 +43,7 @@ namespace Schatzoeken
 
             map.Children.Add(layer);
             map.Children.Add(icon);
-            map.Children.Add(pop);
+            layer.Children.Add(pop);
             pop.Visibility = Visibility.Collapsed;
 
             geoLocation.PositionChanged +=
@@ -94,6 +94,7 @@ namespace Schatzoeken
                                 {
                                     pop.setInformationText(r.GetInformation());
                                     pop.setHintText("Hint");
+                                    MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude,currentPoint.Location.Longitude));
                                     hints.Items.Add(r.getTitle());
                                 }
                             }
@@ -188,20 +189,23 @@ namespace Schatzoeken
             });
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach(RouteObject r in routeObjectList)
-            {
-                if(r.getTitle() == ListBox.GetItemText(hints.SelectedItem)
+            await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+                () =>
                 {
-                    pop.setInformationText(r.GetInformation());
-                    pop.setHintText("Hint");
-                    pop.Visibility = Visibility.Visible;
-                }
-            }
+                    foreach (RouteObject r in routeObjectList)
+                    {
+                        if (r.getTitle() == hints.SelectedItem.ToString())
+                        {
+                            pop.setInformationText(r.GetInformation());
+                            pop.setHintText("Hint");
+                            pop.Visibility = Visibility.Visible;
+                            MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
+                        }
+                    }
+                });
         }
-
-        //nipples = ((ListBoxItem)lst_department.SelectedValue).Content.ToString();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
