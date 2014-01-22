@@ -30,8 +30,13 @@ namespace Schatzoeken.View
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            List<String> niks = new List<string>();
+            niks.Add("De highscore is leeg.");
             List<Model.Person> persons = Control.DataReader.GetDataReader().GetPersonsFromHighscore();
-            playersInHighscore.ItemsSource = persons;
+            if (persons.Count > 0)
+                playersInHighscore.ItemsSource = persons;
+            else
+                playersInHighscore.ItemsSource = niks;
         }
 
         private void goBack(object sender, TappedRoutedEventArgs e)
