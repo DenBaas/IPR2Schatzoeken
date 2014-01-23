@@ -24,6 +24,11 @@ namespace Schatzoeken.Model
             this.isHint = isNotMonster;
         }
 
+        public RouteObject()
+        {
+
+        }
+
         public void SetVisited()
         {
             this.visited = true;

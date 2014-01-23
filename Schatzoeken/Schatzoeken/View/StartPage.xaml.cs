@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Schatzoeken.Control;
+using Windows.UI;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,6 +29,7 @@ namespace Schatzoeken.View
         {
             this.InitializeComponent();
             NameBox.Text = "";
+            appNameBlock.Text = "Bassie & Igor";
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -53,6 +55,7 @@ namespace Schatzoeken.View
 
         private void goToHelp(object sender, TappedRoutedEventArgs e)
         {
+            helpButton.Background = new SolidColorBrush(Colors.Transparent);
             this.Frame.Navigate(typeof(Help));
         }
 

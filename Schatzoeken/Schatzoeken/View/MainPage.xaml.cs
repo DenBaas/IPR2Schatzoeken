@@ -82,14 +82,9 @@ namespace Schatzoeken
                             {   
                                 if(r.getGeofence() == geo)
                                     msg = new MessageDialog(r.getTitle());
-                                Debug.Print(r.GetInformation());
                             }
                             this.message = msg.ShowAsync();
                             await this.message;
-                        }
-                        if(state == GeofenceState.Exited)
-                        {
-
                         }
                     }
                 });

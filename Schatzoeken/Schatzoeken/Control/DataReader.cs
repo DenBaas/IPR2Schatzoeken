@@ -68,7 +68,7 @@ namespace Schatzoeken.Control
             string fileText = "";
             foreach (Model.Person person in persons)
                 fileText += person.Name + "\r\n" + person.GetScore().ToString() + "\r\n";
-            await Windows.Storage.FileIO.WriteTextAsync(_File, fileText);
+            await Windows.Storage.FileIO.AppendTextAsync(_File, fileText);
         }
 
         public async void SavePerson(Model.Person person)

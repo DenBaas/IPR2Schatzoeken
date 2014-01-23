@@ -15,11 +15,13 @@
             <RowDefinition Height="80*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Content="Help" BorderThickness="0" Foreground="Black" FontSize="32" VerticalAlignment="Stretch" FontFamily="Castellar" Tapped="goToHelp" Margin="19,28,0,586" Grid.RowSpan="2"/>
+        <Button x:Name="helpButton" Grid.Row="0" Content="Help" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="32" VerticalAlignment="Stretch" FontFamily="Castellar" Tapped="goToHelp" Margin="19,28,0,586" Grid.RowSpan="2"/>
         <Grid Grid.Column="0" Grid.Row="0" x:Name="miniMapGrid" Margin="150,100" Grid.RowSpan="2" >
             <Grid.Background>
                 <ImageBrush ImageSource="/Resources/miniMap.png"/>
             </Grid.Background>
+            <TextBlock x:Name="appNameBlock" Height="150" Margin="10,81,10,210" Text="Bassie en Igor" TextAlignment="Center" Foreground="DarkBlue" FontFamily="Castellar" FontSize="120" TextWrapping="WrapWholeWords" />
+            <TextBlock Height="100" Margin="10,305,10,86" Text="Op Zoek Naar De Schat" Foreground="DarkBlue" TextAlignment="Center" FontFamily="Castellar" FontSize="60"/>
         </Grid>
 
         <Grid Grid.Row="2">
