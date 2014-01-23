@@ -14,11 +14,6 @@ namespace Schatzoeken.Model
         private int hintsFound = 0;
         public string Name = String.Empty;
 
-        public Person(string bas)
-        {
-            Name = bas;
-        }
-
         public Person()
         {
 

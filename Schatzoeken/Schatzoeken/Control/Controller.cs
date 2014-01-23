@@ -11,7 +11,7 @@ namespace Schatzoeken.Control
 {
     public class Controller
     {
-        public Person Person = new Person("baas");
+        public Person Person = new Person();
         public Route route;
         public bool GameEnded = false;
         //singleton
