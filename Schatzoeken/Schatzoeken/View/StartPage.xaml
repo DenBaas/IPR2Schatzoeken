@@ -11,10 +11,12 @@
             <ImageBrush ImageSource="/Resources/Map2.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
             <RowDefinition Height="80*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0" x:Name="miniMapGrid" Margin="150,100">
+        <Button Grid.Row="0" Content="Help" FontSize="32" VerticalAlignment="Stretch" FontFamily="Castellar" Tapped="goToHelp"/>
+        <Grid Grid.Column="0" Grid.Row="0" x:Name="miniMapGrid" Margin="150,100" Grid.RowSpan="2" >
             <Grid.Background>
                 <ImageBrush ImageSource="/Resources/miniMap.png"/>
             </Grid.Background>

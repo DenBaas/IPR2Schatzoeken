@@ -55,7 +55,7 @@ namespace Schatzoeken
         {
             List<Geofence> geos = Control.Controller.GetController().getGeofences();
             GeofenceMonitor.Current.Geofences.Clear();
-
+            Control.Controller.GetController().ResetGame();
             foreach (Geofence g in geos)
             {
                 Debug.Print("Het Geo id: " + g.Id);
@@ -140,7 +140,7 @@ namespace Schatzoeken
                         }
                         if (Controller.GetController().GameEnded)
                         {
-                            Controller.GetController().EndGame(true);
+                            Controller.GetController().EndGame();
                             this.Frame.Navigate(typeof(View.BlankPage1));
                         }
                         return;
@@ -218,7 +218,7 @@ namespace Schatzoeken
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Controller.GetController().EndGame(false);
+            Controller.GetController().EndGame();
             this.Frame.Navigate(typeof(View.BlankPage1));
         }
     }

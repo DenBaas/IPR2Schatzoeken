@@ -170,18 +170,6 @@ namespace Schatzoeken.Model
             }, 10), mask, false, new TimeSpan(1)), 100));
         }
 
-        public static Route GETSTANDARDROUTE()
-        {
-            Route route = new Route();
-
-            TimeSpan dwellTime = TimeSpan.FromSeconds(2);
-
-            //Hint hint = new Hint("Hint", new Geofence("bleh", new Geocircle(new BasicGeoposition { Latitude = 51.589495, Longitude = 4.780121 }, 10), mask, false, dwellTime));
-
-
-            return route;
-        }
-
         public List<RouteObject> GetRouteObjects()
         {
             return routeObjects;
