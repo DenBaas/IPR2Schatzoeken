@@ -13,7 +13,7 @@ namespace Schatzoeken.Control
     {
         private string padPlayers = @"players.txt";
         private readonly StorageFolder dataPath;
-        List<Person> persons = new List<Person>();
+        public List<Person> persons = new List<Person>();
         //singleton
         private static DataReader datareader = null;
 
