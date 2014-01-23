@@ -29,10 +29,9 @@ namespace Schatzoeken.Control
             return controller;
         }
 
-        public void EndGame(bool finished)
+        public void EndGame()
         {
-            if(finished)
-                DataReader.GetDataReader().SavePerson(Person);
+            DataReader.GetDataReader().SavePerson(Person);
             Person = new Person();
             route = new Route();
         }

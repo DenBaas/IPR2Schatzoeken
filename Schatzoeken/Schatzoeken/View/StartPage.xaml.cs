@@ -51,6 +51,11 @@ namespace Schatzoeken.View
                 Start.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
+        private void goToHelp(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Help));
+        }
+
         private void Button_Click(object sender, TappedRoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage));

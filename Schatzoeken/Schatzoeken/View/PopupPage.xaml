@@ -17,14 +17,14 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="TitleBlock" Foreground="Black" Grid.Row="0" Margin="80,33,0,0" FontSize="40" Width="229" HorizontalAlignment="Left"/>
+        <TextBlock x:Name="TitleBlock" FontFamily="Castellar" Foreground="Black" Grid.Row="0" Margin="80,33,0,0" FontSize="40" Width="229" HorizontalAlignment="Left"/>
         <Button Grid.Row="0" Foreground="Black" Background="LightGray"  Content="X" Margin="0,30,91,0" Tapped="PopUpClosed" HorizontalAlignment="Right" VerticalAlignment="Top" Width="43"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <ScrollViewer VerticalAlignment="Top" Foreground="Black" Width="Auto" Height="180" MaxWidth="500" Margin="67,10,192,0">
-                <TextBlock x:Name="InformationBlock" TextWrapping="WrapWholeWords" FontSize="24" Width="217" />
+                <TextBlock x:Name="InformationBlock" FontFamily="Castellar" TextWrapping="WrapWholeWords" FontSize="24" Width="217" />
             </ScrollViewer>
             <Image x:Name="ImageBlock" Margin="313,10,76,75" MaxWidth="120" MaxHeight="120" Stretch="Fill"/>
         </Grid>

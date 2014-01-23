@@ -37,7 +37,6 @@ namespace Schatzoeken
         private Geolocator geoLocation = new Geolocator();
         private Waypoint currentPoint = new Waypoint(new Bing.Maps.Location());
         private List<RouteObject> routeObjectList = Control.Controller.GetController().getRouteObjectList();
-        //PopupPage pop = new PopupPage();
 
         public MainPage()
         {
@@ -54,8 +53,7 @@ namespace Schatzoeken
         private void startGame()
         {
             List<Geofence> geos = Control.Controller.GetController().getGeofences();
-            GeofenceMonitor.Current.Geofences.Clear();s
-
+            GeofenceMonitor.Current.Geofences.Clear();
             foreach (Geofence g in geos)
             {
                 Debug.Print("Het Geo id: " + g.Id);
@@ -68,11 +66,6 @@ namespace Schatzoeken
 
         private async void OnGeofenceStateChanged(GeofenceMonitor sender, object args)
         {
-            UICommand showHintCommand = new UICommand("toon Hint", new UICommandInvokedHandler(commandHandler));
-            UICommand closeHintCommand = new UICommand("sluit Hint", new UICommandInvokedHandler(commandHandler));
-            showHintCommand.Id = 1;
-            closeHintCommand.Id = 2;
-
             var reports = sender.ReadReports();
             await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
                 async () =>
@@ -91,8 +84,6 @@ namespace Schatzoeken
                                     msg = new MessageDialog(r.getTitle());
                                 Debug.Print(r.GetInformation());
                             }
-                            //msg.Commands.Add(showHintCommand);
-                            //msg.Commands.Add(closeHintCommand);
                             this.message = msg.ShowAsync();
                             await this.message;
                         }
@@ -102,22 +93,6 @@ namespace Schatzoeken
                         }
                     }
                 });
-        }
-
-        private void commandHandler(IUICommand command)
-        {
-            var commandId = command.Id.ToString();
-            switch(commandId)
-            {
-                case "1":
-                    this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, ()=>
-                    {
-                        //pop.Visibility = Visibility.Visible;
-                    }).AsTask().Wait();
-                    break;
-                case "2":
-                    break;
-            }
         }
             
         private async void routeObjectFound(Geofence geo)
@@ -147,7 +122,7 @@ namespace Schatzoeken
                                     pop.setImage(new BitmapImage(new Uri("ms-appx:///Assets/chest.png", UriKind.Absolute)));
                                 if (Controller.GetController().GameEnded)
                                 {
-                                    Controller.GetController().EndGame(true);
+                                    Controller.GetController().EndGame();
                                 }
                                 return;
                             }
@@ -225,7 +200,7 @@ namespace Schatzoeken
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Controller.GetController().EndGame(true);
+            Controller.GetController().EndGame();
             this.Frame.Navigate(typeof(View.BlankPage1));
         }
     }
