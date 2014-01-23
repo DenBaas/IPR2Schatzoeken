@@ -39,6 +39,11 @@ namespace Schatzoeken.Model
             return visited;
         }
 
+        public void setNotVisited()
+        {
+            this.visited = false;
+        }
+
         public Geofence getGeofence()
         {
             return this.geofence;

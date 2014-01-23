@@ -33,7 +33,11 @@ namespace Schatzoeken.Control
         {
             DataReader.GetDataReader().SavePerson(Person);
             Person = new Person();
-            route = new Route();
+            foreach(RouteObject r in getRouteObjectList())
+            {
+                r.setNotVisited();
+            }
+            //route = new Route();
         }
 
         public List<Geofence> getGeofences()

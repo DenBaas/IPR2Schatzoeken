@@ -33,17 +33,17 @@ namespace Schatzoeken.View
             PopupControl.Visibility = Visibility.Collapsed;
         }
 
-        public void setHintText(string hintInfo)
+        public async void setHintText(string hintInfo)
         {
-            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 TitleBlock.Text = hintInfo;
             });
         }
 
-        public void setInformationText(String information)
+        public async void setInformationText(String information)
         {
-            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 InformationBlock.Text = information;
             });

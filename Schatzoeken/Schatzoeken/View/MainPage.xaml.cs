@@ -54,9 +54,9 @@ namespace Schatzoeken
         {
             List<Geofence> geos = Control.Controller.GetController().getGeofences();
             GeofenceMonitor.Current.Geofences.Clear();
+            Debug.Print(GeofenceMonitor.Current.Status.ToString());
             foreach (Geofence g in geos)
             {
-                Debug.Print("Het Geo id: " + g.Id);
                 if (!GeofenceMonitor.Current.Geofences.Contains(g))
                 {
                     GeofenceMonitor.Current.Geofences.Add(g);
@@ -77,14 +77,22 @@ namespace Schatzoeken
                         if(state == GeofenceState.Entered)
                         {
                             var msg = new MessageDialog("");
-                            routeObjectFound(geo);
                             foreach (RouteObject r in routeObjectList)
-                            {   
-                                if(r.getGeofence() == geo)
+                            {
+                                if (r.getGeofence() == geo)
                                     msg = new MessageDialog(r.getTitle());
                             }
                             this.message = msg.ShowAsync();
                             await this.message;
+                            routeObjectFound(geo);
+                        }
+                        else if(state == GeofenceState.Exited)
+                        {
+                            foreach(RouteObject r in routeObjectList)
+                            {
+                                if(r.getGeofence() == geo)
+                                    r.setNotVisited();
+                            }
                         }
                     }
                 });
