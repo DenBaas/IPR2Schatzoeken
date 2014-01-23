@@ -21,11 +21,7 @@ namespace Schatzoeken.Model
                 this.HitPoints = -1 * newHitPoints;
             else
                 this.HitPoints = newHitPoints;
-        }
-
-        public Monster():
-            base("","",new Geofence("",new Geocircle(new BasicGeoposition(),1)),false)
-        { 
+            visited = false;
         }
 
         public override void Action()

@@ -17,9 +17,9 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="80*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Terug" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tapped="goBack" FontSize="48" Grid.ColumnSpan="1"/>
-            <TextBlock HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Highscore" FontSize="48" SelectionHighlightColor="#FF1E113E"/>
+            <Button Content="Terug" FontFamily="Castellar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tapped="goBack" FontSize="32" Grid.ColumnSpan="1"/>
+            <TextBlock HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Highscore" FontFamily="Castellar" FontSize="48" SelectionHighlightColor="#FF1E113E"/>
         </Grid>        
-        <ListBox x:Name="playersInHighscore" HorizontalAlignment="Left" ItemsSource="{Binding}" VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="False"/>
+        <ListBox x:Name="playersInHighscore" FontFamily="Castellar" HorizontalAlignment="Left" ItemsSource="{Binding}" VerticalAlignment="Stretch" Background="#19FFFFFF" Grid.Row="1" IsEnabled="False"/>
     </Grid>
 </Page>

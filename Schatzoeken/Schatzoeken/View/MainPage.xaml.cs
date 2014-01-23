@@ -54,7 +54,7 @@ namespace Schatzoeken
         private void startGame()
         {
             List<Geofence> geos = Control.Controller.GetController().getGeofences();
-            GeofenceMonitor.Current.Geofences.Clear();
+            GeofenceMonitor.Current.Geofences.Clear();s
 
             foreach (Geofence g in geos)
             {
@@ -89,11 +89,16 @@ namespace Schatzoeken
                             {   
                                 if(r.getGeofence() == geo)
                                     msg = new MessageDialog(r.getTitle());
+                                Debug.Print(r.GetInformation());
                             }
                             //msg.Commands.Add(showHintCommand);
                             //msg.Commands.Add(closeHintCommand);
                             this.message = msg.ShowAsync();
                             await this.message;
+                        }
+                        if(state == GeofenceState.Exited)
+                        {
+
                         }
                     }
                 });
@@ -115,42 +120,44 @@ namespace Schatzoeken
             }
         }
             
-        private void routeObjectFound(Geofence geo)
+        private async void routeObjectFound(Geofence geo)
         {
-            try
-            {
-                foreach (RouteObject r in routeObjectList)
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    if (r.getGeofence() == geo)
+                    try
                     {
-                        r.Action();
-                        PopupPage pop = new PopupPage();
-                        pop.setInformationText(r.GetInformation());
-                        pop.setHintText(r.getTitle());
-                        layer.Children.Add(pop);
-                        MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
-                        if (r.getIsHint())
+                        foreach (RouteObject r in routeObjectList)
                         {
-                            hints.Items.Add(r.getTitle());
-                            pop.setImage(new BitmapImage(new Uri("ms-appx:///Assets/hint.png", UriKind.Absolute)));
+                            if (r.getGeofence() == geo)
+                            {
+                                r.Action();
+                                PopupPage pop = new PopupPage();
+                                pop.setInformationText(r.GetInformation());
+                                pop.setHintText(r.getTitle());
+                                layer.Children.Add(pop);
+                                MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
+                                if (r.getIsHint())
+                                {
+                                    hints.Items.Add(r.getTitle());
+                                    pop.setImage(new BitmapImage(new Uri("ms-appx:///Assets/hint.png", UriKind.Absolute)));
+                                }
+                                if (r.getIsMonster())
+                                    pop.setImage(new BitmapImage(new Uri("ms-appx:///Assets/cuteMonster.png", UriKind.Absolute)));
+                                if (r.getIsTreasure())
+                                    pop.setImage(new BitmapImage(new Uri("ms-appx:///Assets/chest.png", UriKind.Absolute)));
+                                if (Controller.GetController().GameEnded)
+                                {
+                                    Controller.GetController().EndGame(true);
+                                }
+                                return;
+                            }
                         }
-                        if(r.getIsMonster())
-                        {
-                            pop.setImage(new BitmapImage(new Uri("ms-appx:///Assets/cuteMonster.png", UriKind.Absolute)));
-                        }
-                        if (Controller.GetController().GameEnded)
-                        {
-                            Controller.GetController().EndGame(true);
-                            this.Frame.Navigate(typeof(View.BlankPage1));
-                        }
-                        return;
                     }
-                }
-            }
-            catch(Exception e)
-            {
-                Debug.Print(e);
-            }
+                    catch (Exception e)
+                    {
+                        Debug.Print(e);
+                    }
+                });
         }
 
         private async void geoLocation_PositionChanged(Geolocator sender, PositionChangedEventArgs e)
@@ -181,13 +188,13 @@ namespace Schatzoeken
             });
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SolidColorBrush color = new SolidColorBrush();
             color.Color = Colors.Transparent;
             hints.Background = color;
-            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, 
-                async ()=>
+            await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, 
+                ()=>
                 {
                     foreach (RouteObject r in routeObjectList)
                     {
@@ -218,7 +225,7 @@ namespace Schatzoeken
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Controller.GetController().EndGame(false);
+            Controller.GetController().EndGame(true);
             this.Frame.Navigate(typeof(View.BlankPage1));
         }
     }

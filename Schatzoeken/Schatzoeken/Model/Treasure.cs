@@ -16,6 +16,7 @@ namespace Schatzoeken.Model
         public Treasure(string newTreasure,string newTitle, Geofence newGeo, int newPoints) : base(newTreasure,newTitle ,newGeo,false)
         {
             this.Points = newPoints;
+            visited = false;
         }
 
         public override void Action()

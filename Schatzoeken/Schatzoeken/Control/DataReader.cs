@@ -20,7 +20,7 @@ namespace Schatzoeken.Control
         private DataReader()
         {
             dataPath = ApplicationData.Current.LocalFolder;
-            initDataConnector();
+            initDataConnector().GetAwaiter();
         }
 
         public static DataReader GetDataReader()

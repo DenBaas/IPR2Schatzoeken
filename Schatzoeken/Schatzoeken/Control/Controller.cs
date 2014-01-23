@@ -35,7 +35,6 @@ namespace Schatzoeken.Control
                 DataReader.GetDataReader().SavePerson(Person);
             Person = new Person();
             route = new Route();
-            GameEnded = true;
         }
 
         public List<Geofence> getGeofences()

@@ -57,14 +57,18 @@ namespace Schatzoeken.Model
         public abstract void Action();
 
 
-        internal bool getIsMonster()
+        public bool getIsMonster()
         {
-            bool isMonster = false;
-            if (this.GetType().Equals(new Monster().GetType()))
-            {
-                isMonster = true;
-            }
-            return isMonster;
+            if (this.GetType() == typeof(Monster))
+                return true;
+            else return false;
+        }
+
+        public bool getIsTreasure()
+        {
+            if (this.GetType() == typeof(Treasure))
+                return true;
+            else return false;
         }
     }
 }

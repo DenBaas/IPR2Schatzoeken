@@ -11,12 +11,13 @@ namespace Schatzoeken.Model
 {
     public class Hint : RouteObject
     {
-        public static int POINTS = 5;
+        public static int POINTS = 50;
         public readonly string Instruction;
 
         public Hint(string newHint, string newTitle, Geofence newGeo) : base(newHint ,newTitle ,newGeo, true)
         {
             Instruction = newHint;
+            visited = false;
         }
 
         public override void Action()
