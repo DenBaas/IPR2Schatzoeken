@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation.Geofencing;
 using Bing.Maps.Directions;
 using Schatzoeken.Control;
+using Windows.Devices.Geolocation;
 
 namespace Schatzoeken.Model
 {
@@ -22,7 +23,10 @@ namespace Schatzoeken.Model
                 this.HitPoints = newHitPoints;
         }
 
-
+        public Monster():
+            base("","",new Geofence("",new Geocircle(new BasicGeoposition(),1)),false)
+        { 
+        }
 
         public override void Action()
         {

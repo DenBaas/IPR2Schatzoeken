@@ -29,9 +29,9 @@
                     <RowDefinition Height="15*"/>
                     <RowDefinition Height="90*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="score" Text="Hints" FontSize="60" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False" Background="Transparent" BorderBrush="Transparent" Foreground="White" BorderThickness="0"/>
+                <TextBox x:Name="score" Text="Hints" FontSize="60" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False" Background="Transparent" BorderBrush="Transparent" FontFamily="Castellar" Foreground="White" BorderThickness="0" Margin="82,16,94,16"/>
                 <ListBox x:Name="hints" IsEnabled="True" HorizontalAlignment="Left" Margin="60,0,60,100" VerticalAlignment="Stretch" Background="Transparent" Grid.Row="1" Tapped="hints_Tapped" SelectionChanged="ListBox_SelectionChanged" Foreground="Black" FontSize="40" BorderThickness="0"/>
-                <Button Margin="100,580,0,28" Height="50" Width="200" BorderThickness="0" Background="Transparent" Click="Button_Click" Grid.Row="1" />
+                <Button Margin="45,580,0,28" Content="Argh! Stop this scury hunt!" Height="50" Width="310" BorderThickness="0" FontFamily="Castellar" Foreground="Black" Background="Transparent" Click="Button_Click" Grid.Row="1" />
             </Grid>
         </Grid>
     </Grid>

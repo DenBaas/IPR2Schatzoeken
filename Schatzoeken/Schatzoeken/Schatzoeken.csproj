@@ -147,9 +147,14 @@
     <None Include="Schatzoeken_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\cuteMonster.png" />
+    <Content Include="Assets\hint.png" />
     <Content Include="Assets\hintPaper.jpg" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\map2.png" />
+    <Content Include="Assets\scrollHorizontal1.png" />
+    <Content Include="Resources\cuteMonster.png" />
+    <Content Include="Resources\hint.png" />
     <Content Include="Resources\hintPaper.jpg" />
     <Content Include="Resources\map1.jpg" />
     <Content Include="Resources\map2.png" />
@@ -157,6 +162,7 @@
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Resources\scrollHorizontal1.png" />
     <Content Include="Resources\treasure map.jpg" />
   </ItemGroup>
   <ItemGroup>

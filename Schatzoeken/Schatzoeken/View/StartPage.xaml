@@ -19,7 +19,7 @@
                 <ImageBrush ImageSource="/Resources/miniMap.png"/>
             </Grid.Background>
         </Grid>
-        
+
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
@@ -27,10 +27,10 @@
                 <ColumnDefinition Width="20*"/>
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock HorizontalAlignment="Center" Grid.Column="0" TextWrapping="Wrap" Text="Naam:" VerticalAlignment="Top" FontSize="48" SelectionHighlightColor="#FF1E113E"/>
-            <TextBox x:Name="NameBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="48" TextChanged="TextBox_TextChanged" Background="#7FFFFFFF"/>
-            <Button x:Name="Start" Content="Start" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" Tapped="Button_Click" Visibility="Collapsed" />
-            <Button Grid.Column="3" Content="Highscore" Tapped="goToHighscore" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" />
+            <TextBlock HorizontalAlignment="Center" Grid.Column="0" TextWrapping="Wrap" Text="Naam:" VerticalAlignment="Top" FontSize="36" FontFamily="Castellar" SelectionHighlightColor="#FF1E113E" Height="68" Margin="28,10,36,0" Width="141"/>
+            <TextBox x:Name="NameBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="32" FontFamily="Castellar" TextChanged="TextBox_TextChanged" Background="#7FFFFFFF" Height="78"/>
+            <Button x:Name="Start" Content="Start" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" FontFamily="Castellar" Tapped="Button_Click" Visibility="Visible" Height="81" Margin="54,0,51,0" Width="168" />
+            <Button Grid.Column="3" Content="Highscore" Tapped="goToHighscore" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" FontFamily="Castellar" Height="81" Margin="13,0" />
         </Grid>
     </Grid>
 </Page>

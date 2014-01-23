@@ -21,6 +21,7 @@ using Windows.Devices.Geolocation.Geofencing;
 using Windows.UI.Popups;
 using Schatzoeken.Model;
 using Windows.UI;
+using Windows.UI.Xaml.Media.Imaging;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -128,8 +129,15 @@ namespace Schatzoeken
                         pop.setHintText(r.getTitle());
                         layer.Children.Add(pop);
                         MapLayer.SetPosition(pop, new Location(currentPoint.Location.Latitude, currentPoint.Location.Longitude));
-                        if(r.getIsHint())
+                        if (r.getIsHint())
+                        {
                             hints.Items.Add(r.getTitle());
+                            pop.setImage(new BitmapImage(new Uri("ms-appx:///Assets/hint.png", UriKind.Absolute)));
+                        }
+                        if(r.getIsMonster())
+                        {
+                            pop.setImage(new BitmapImage(new Uri("ms-appx:///Assets/cuteMonster.png", UriKind.Absolute)));
+                        }
                         if (Controller.GetController().GameEnded)
                         {
                             Controller.GetController().EndGame(true);
@@ -189,6 +197,7 @@ namespace Schatzoeken
                             pop2.Visibility = Visibility.Visible;
                             pop2.setInformationText(r.GetInformation());
                             pop2.setHintText("Hint");
+                            pop2.setImage(new BitmapImage(new Uri("ms-appx:///Assets/hint.png", UriKind.Absolute)));
 
                             layer.Children.Add(pop2);
 

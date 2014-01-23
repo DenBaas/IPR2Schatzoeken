@@ -23,7 +23,7 @@ namespace Schatzoeken.Model
         {
             MonitoredGeofenceStates mask = MonitoredGeofenceStates.Entered | MonitoredGeofenceStates.Exited;
 
-            routeObjects.Add(new Hint("Loop 100 meter rechtdoor met de weg mee." + Environment.NewLine + "Ga linksaf en loop 200 meter rechtdoor tot de T-splitsing.","Hint 1",new Geofence("Hint 1",new Geocircle(new BasicGeoposition
+            routeObjects.Add(new Hint("Loop 100 meter rechtdoor met de weg mee." + Environment.NewLine + "Ga rechtsaf en loop 200 meter rechtdoor tot de T-splitsing.","Hint 1",new Geofence("Hint 1",new Geocircle(new BasicGeoposition
                 {
                     Latitude = 51.587733, 
                     Longitude = 4.782515
